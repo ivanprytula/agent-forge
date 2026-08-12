@@ -25,8 +25,9 @@ set -o errtrace     # Inherit ERR trap
 ```
 
 ### Strict Mode Options
+
 | Option | Effect |
-|--------|--------|
+| -------- | -------- |
 | `-e` / `errexit` | Exit if any command fails |
 | `-u` / `nounset` | Exit if variable is undefined |
 | `-o pipefail` | Fail if any command in a pipe fails |
@@ -37,6 +38,7 @@ set -o errtrace     # Inherit ERR trap
 ## Functions & Error Handling
 
 ### Function Template
+
 ```bash
 # Print an info message
 info() {
@@ -79,6 +81,7 @@ trap 'trap_error ${LINENO}' ERR
 ```
 
 ### Usage Example
+
 ```bash
 #!/bin/bash
 set -o errexit -o pipefail -o nounset -o errtrace
@@ -113,6 +116,7 @@ main "$@"
 ## Variables & Quoting
 
 ### Variable Best Practices
+
 ```bash
 # Good: quote all variables
 readonly DB_HOST="localhost"
@@ -129,6 +133,7 @@ cp $file /backup  # Could break if filename has spaces
 ```
 
 ### Configuration from .env
+
 ```bash
 # Load environment variables from .env file
 if [[ -f "${PROJECT_ROOT}/.env" ]]; then
@@ -150,6 +155,7 @@ API_PORT="${API_PORT:-8000}"
 ## Common Patterns
 
 ### Check Docker & Docker Compose
+
 ```bash
 # Ensure Docker is running
 docker info >/dev/null 2>&1 || error "Docker daemon is not running"
@@ -167,6 +173,7 @@ info "Using: ${DOCKER_COMPOSE}"
 ```
 
 ### Wait for Service Health
+
 ```bash
 # Wait for PostgreSQL to be ready
 wait_for_postgres() {
@@ -190,6 +197,7 @@ wait_for_postgres
 ```
 
 ### Cleanup & Exit Handlers
+
 ```bash
 # Cleanup function (called on EXIT)
 cleanup() {
@@ -215,6 +223,7 @@ main "$@"
 ## Logging & Colors
 
 ### Color Output for Readability
+
 ```bash
 # ANSI color codes
 readonly RED='\033[0;31m'
@@ -242,6 +251,7 @@ error() {
 ```
 
 ### Verbose Mode
+
 ```bash
 # Enable with -v flag: sh script.sh -v
 VERBOSE_MODE=false
@@ -271,6 +281,7 @@ done
 ## Script Organization
 
 ### Directory Structure
+
 ```
 scripts/
   ├── start.sh         # Bring up services
@@ -284,6 +295,7 @@ scripts/
 ```
 
 ### Shared Functions (lib/common.sh)
+
 ```bash
 #!/bin/bash
 
@@ -309,6 +321,7 @@ success() {
 ```
 
 ### Using Shared Functions
+
 ```bash
 #!/bin/bash
 
@@ -325,6 +338,7 @@ info "Starting services..."
 ## Testing Scripts
 
 ### Simple Testing Example
+
 ```bash
 #!/bin/bash
 
@@ -378,6 +392,7 @@ echo "All tests passed!"
 ## Useful Tools & Resources
 
 ### ShellCheck (Linting)
+
 Catch common bash errors:
 ```bash
 # Install
@@ -389,6 +404,7 @@ shellcheck scripts/**/*.sh
 ```
 
 ### Sample .github/workflows/ci.yml
+
 ```yaml
 name: Quality Checks
 

@@ -1,4 +1,9 @@
 ---
+ignores:
+  - ".venv/**"
+  - ".remember/**"
+  - "node_modules/**"
+  - "vendor/**"
 MD001: true
 MD003: false
 MD007: false
@@ -21,3 +26,4 @@ MD049: false
 MD051: false
 MD052: false
 MD053: false
+MD060: false

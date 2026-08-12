@@ -262,7 +262,7 @@
 **Critical format rules baked into this skeleton:**
 - `0-assessment.md` is the FIRST row in Report Files (not `0.1-architecture.md`)
 - `## Analysis Context & Assumptions` uses `&` (never word "and")
-- `---` horizontal rules between EVERY pair of `## ` sections (minimum 6)
+- `---` horizontal rules between EVERY pair of `##` sections (minimum 6)
 - `### Quick Wins` always present (with fallback note if no low-effort findings)
 - `### Needs Verification` and `### Finding Overrides` always present (even if empty with `—`)
 - References has TWO subsections with THREE-column tables (never flat 2-column)

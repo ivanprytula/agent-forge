@@ -93,7 +93,7 @@ After drawing ANY diagram, verify:
 These colors are shared across ALL Mermaid diagrams. Colors are from ColorBrewer qualitative palettes — designed for colorblind accessibility.
 
 | Color Role | Fill | Stroke | Used For |
-|------------|------|--------|----------|
+| ------------ | ------ | -------- | ---------- |
 | Blue | `#6baed6` | `#2171b5` | Services/Processes |
 | Amber | `#fdae61` | `#d94701` | External Interactors |
 | Green | `#74c476` | `#238b45` | Data Stores |
@@ -104,7 +104,7 @@ These colors are shared across ALL Mermaid diagrams. Colors are from ColorBrewer
 ### Design Rationale
 
 | Element | Fill | Stroke | Text | Why |
-|---------|------|--------|------|-----|
+| --------- | ------ | -------- | ------ | ----- |
 | Process | `#6baed6` | `#2171b5` | `#000000` | Medium blue — visible on both themes |
 | External Interactor | `#fdae61` | `#d94701` | `#000000` | Warm amber — distinct from blue/green |
 | Data Store | `#74c476` | `#238b45` | `#000000` | Medium green — natural for storage |
@@ -180,7 +180,7 @@ classDef datastore fill:#74c476,stroke:#238b45,stroke-width:2px,color:#000000
 ```
 
 | Element Type | Shape Syntax | Example |
-|-------------|-------------|---------|
+| ------------- | ------------- | --------- |
 | Process | `(("Name"))` circle | `WebApi(("Web API")):::process` |
 | External Interactor | `["Name"]` rectangle | `User["User/Browser"]:::external` |
 | Data Store | `[("Name")]` cylinder | `Database[("PostgreSQL")]:::datastore` |
@@ -284,7 +284,7 @@ classDef datastore fill:#74c476,stroke:#238b45,stroke-width:2px,color:#000000
 ```
 
 | Element Type | Shape Syntax | Notes |
-|-------------|-------------|-------|
+| ------------- | ------------- | ------- |
 | Services/Processes | `["Name"]` or `(["Name"])` | Rounded rectangles or stadium |
 | External Actors | `(["Name"])` with `external` class | Amber distinguishes them |
 | Data Stores | `[("Name")]` cylinder | Same as DFD |
@@ -441,7 +441,7 @@ Used in: `1.2-threatmodel-summary.mmd` (generated only when detailed diagram has
 ## Naming Conventions
 
 | Item | Convention | Example |
-|------|-----------|---------|
+| ------ | ----------- | --------- |
 | Element ID | PascalCase, no spaces | `WebApi`, `UserDb` |
 | Display Name | Human readable in quotes | `"Web API"`, `"User Database"` |
 | Flow Label | Protocol or action in quotes | `"HTTPS"`, `"SQL"`, `"gRPC"` |

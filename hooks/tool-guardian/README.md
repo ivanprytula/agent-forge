@@ -77,7 +77,7 @@ The hook is configured in `hooks.json` to run on the `preToolUse` event:
 ### Environment Variables
 
 | Variable | Values | Default | Description |
-|----------|--------|---------|-------------|
+| ---------- | -------- | --------- | ------------- |
 | `GUARD_MODE` | `warn`, `block` | `block` | `warn` logs threats only; `block` exits non-zero to prevent tool execution |
 | `SKIP_TOOL_GUARD` | `true` | unset | Disable the guardian entirely |
 | `TOOL_GUARD_LOG_DIR` | path | `.github/logs/copilot/tool-guardian` | Directory where guard logs are written |
@@ -97,7 +97,7 @@ The hook is configured in `hooks.json` to run on the `preToolUse` event:
 ## Threat Categories
 
 | Category | Severity | Key Patterns | Suggestion |
-|----------|----------|-------------|------------|
+| ---------- | ---------- | ------------- | ------------ |
 | `destructive_file_ops` | critical | `rm -rf /`, `rm -rf ~`, `rm -rf .`, delete `.env`/`.git` | Use targeted paths or `mv` to back up |
 | `destructive_git_ops` | critical/high | `git push --force` to main/master, `git reset --hard`, `git clean -fd` | Use `--force-with-lease`, `git stash`, dry-run |
 | `database_destruction` | critical/high | `DROP TABLE`, `DROP DATABASE`, `TRUNCATE`, `DELETE FROM` without WHERE | Use migrations, backups, add WHERE clause |

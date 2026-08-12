@@ -511,7 +511,7 @@ Sub-agents are **independent execution contexts** — they have no memory of the
 
    ⛔ **PRE-WRITE GATE — Verify before calling `create_file` for `0-assessment.md`:**
    1. Exactly 7 sections: Report Files, Executive Summary, Action Summary, Analysis Context & Assumptions (with `&`), References Consulted, Report Metadata, Classification Reference
-   2. `---` horizontal rules between EVERY pair of `## ` sections (minimum 6)
+   2. `---` horizontal rules between EVERY pair of `##` sections (minimum 6)
    3. `### Quick Wins`, `### Needs Verification`, `### Finding Overrides` all present
    4. References: TWO subsections (`### Security Standards` + `### Component Documentation`) with 3-column tables and full URLs
    5. ALL metadata values wrapped in backticks; ALL fields present (Model, Analysis Started, Analysis Completed, Duration)
@@ -547,11 +547,13 @@ Sub-agents are **independent execution contexts** — they have no memory of the
 ## Tool Usage
 
 ### Progress Tracking (todo)
+
 - Create todos at start for each major phase
 - Mark in-progress before starting each phase
 - Mark completed immediately after finishing each phase
 
 ### Sub-task Delegation (agent)
+
 Delegate NARROW, READ-ONLY tasks to sub-agents (see Sub-Agent Governance above). Allowed delegations:
 - **Context gathering:** "Search for auth patterns in these directories and return a summary"
 - **Code analysis:** "Read these files and identify security-relevant APIs, credentials, and trust boundaries"

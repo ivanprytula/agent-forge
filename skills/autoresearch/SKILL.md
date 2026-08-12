@@ -185,11 +185,11 @@ When generating experiment ideas, follow this priority order:
 Tab-separated, 5 columns:
 
 ```
-experiment	commit	metric	status	description
-0	a1b2c3d	0.997900	baseline	unmodified code
-1	b2c3d4e	0.993200	keep	increase learning rate to 0.04
-2	c3d4e5f	1.005000	discard	switch to GeLU activation
-3	d4e5f6g	0.000000	crash	double model width (OOM)
+experiment commit metric status description
+0 a1b2c3d 0.997900 baseline unmodified code
+1 b2c3d4e 0.993200 keep increase learning rate to 0.04
+2 c3d4e5f 1.005000 discard switch to GeLU activation
+3 d4e5f6g 0.000000 crash double model width (OOM)
 ```
 
 ### Git Workflow

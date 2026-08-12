@@ -14,8 +14,6 @@ keywords = ["agent", "skills", "instructions", "claude", "copilot", "kilo", "ope
 dev = [
   "pre-commit>=4.6.1",
   "ruff>=0.16.2",
-  "shellcheck-py>=0.11.0.1",
-  "markdownlint-cli>=0.44.0",
 ]
 
 [tool.ruff]

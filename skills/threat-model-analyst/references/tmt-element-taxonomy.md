@@ -16,7 +16,7 @@ This is the **single authoritative file** for all TMT type classifications.
 ### 1.1 Process Types
 
 | TMT ID | Name | Code Patterns to Identify |
-|--------|------|---------------------------|
+| -------- | ------ | --------------------------- |
 | `SE.P.TMCore.OSProcess` | OS Process | Native executables, system processes, spawned processes |
 | `SE.P.TMCore.Thread` | Thread | Thread pools, `Task`, `pthread`, worker threads |
 | `SE.P.TMCore.WinApp` | Native Application | Win32 apps, C/C++ executables, desktop apps |
@@ -36,7 +36,7 @@ This is the **single authoritative file** for all TMT type classifications.
 ### 1.2 External Interactor Types
 
 | TMT ID | Name | Code Patterns to Identify |
-|--------|------|---------------------------|
+| -------- | ------ | --------------------------- |
 | `SE.EI.TMCore.Browser` | Browser | Browser clients, user agents, web UI consumers |
 | `SE.EI.TMCore.AuthProvider` | Authorization Provider | OAuth servers, OIDC providers, IdP, SAML |
 | `SE.EI.TMCore.WebSvc` | External Web Service | External APIs, vendor services, SaaS endpoints |
@@ -50,7 +50,7 @@ This is the **single authoritative file** for all TMT type classifications.
 ### 1.3 Data Store Types
 
 | TMT ID | Name | Code Patterns to Identify |
-|--------|------|---------------------------|
+| -------- | ------ | --------------------------- |
 | `SE.DS.TMCore.CloudStorage` | Cloud Storage | Azure Blob, S3, GCS |
 | `SE.DS.TMCore.SQL` | SQL Database | PostgreSQL, MySQL, SQL Server, SQLite |
 | `SE.DS.TMCore.NoSQL` | Non-Relational DB | MongoDB, CosmosDB, Redis, Cassandra |
@@ -65,7 +65,7 @@ This is the **single authoritative file** for all TMT type classifications.
 ### 1.4 Data Flow Types
 
 | TMT ID | Name | Code Patterns to Identify |
-|--------|------|---------------------------|
+| -------- | ------ | --------------------------- |
 | `SE.DF.TMCore.HTTP` | HTTP | `fetch()`, `axios`, `HttpClient`, REST without TLS |
 | `SE.DF.TMCore.HTTPS` | HTTPS | TLS-secured REST, `https://` endpoints |
 | `SE.DF.TMCore.Binary` | Binary | gRPC, Protobuf, raw binary protocols |
@@ -85,7 +85,7 @@ This is the **single authoritative file** for all TMT type classifications.
 **Line Boundaries:**
 
 | TMT ID | Name | Code Indicators |
-|--------|------|-----------------|
+| -------- | ------ | ----------------- |
 | `SE.TB.L.TMCore.Internet` | Internet Boundary | Public endpoints, API gateways |
 | `SE.TB.L.TMCore.Machine` | Machine Boundary | Process boundaries, VM separation |
 | `SE.TB.L.TMCore.Kernel` | Kernel/User Mode | Drivers, ring 0/3 transitions |
@@ -94,7 +94,7 @@ This is the **single authoritative file** for all TMT type classifications.
 **Border Boundaries:**
 
 | TMT ID | Name | Code Indicators |
-|--------|------|-----------------|
+| -------- | ------ | ----------------- |
 | `SE.TB.B.TMCore.CorpNet` | CorpNet | Corporate network, VPN perimeter |
 | `SE.TB.B.TMCore.Sandbox` | Sandbox | Sandboxed execution environments |
 | `SE.TB.B.TMCore.IEB` | Internet Explorer Boundaries | IE zones, IE security settings |
@@ -107,7 +107,7 @@ This is the **single authoritative file** for all TMT type classifications.
 Create a trust boundary (`subgraph`) when code crosses:
 
 | Boundary Type | Code Indicators |
-|---------------|-----------------|
+| --------------- | ----------------- |
 | **Internet/Public** | Public endpoints, API gateways, load balancers |
 | **Machine** | Process boundaries, host separation |
 | **Kernel/User Mode** | Kernel calls, drivers, syscalls |
@@ -122,7 +122,7 @@ Create a trust boundary (`subgraph`) when code crosses:
 Look for these patterns to identify flows:
 
 | Flow Type | Code Patterns |
-|-----------|---------------|
+| ----------- | --------------- |
 | **HTTP/HTTPS** | `fetch()`, `axios`, `HttpClient`, REST calls |
 | **SQL Database** | ORM queries, SQL connections, `DbContext` |
 | **Message Queue** | Pub/sub, queue send/receive, Dapr pub/sub |
@@ -171,10 +171,12 @@ See [diagram-conventions.md](./diagram-conventions.md) Naming Conventions sectio
 Generate **TWO files** for maximum flexibility:
 
 ### File 1: Pure Mermaid (`.mmd`)
+
 - Raw Mermaid code only, no markdown wrapper
 - Used for: CLI tools, editors, CI/CD, direct rendering
 
 ### File 2: Markdown (`.md`)
+
 - Mermaid in ` ```mermaid ` code fence
 - Include element, flow, and boundary summary tables
 - Used for: GitHub, VS Code, documentation

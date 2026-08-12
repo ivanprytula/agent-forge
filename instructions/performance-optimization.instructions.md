@@ -24,7 +24,7 @@ Comprehensive performance rules for web application development. Every anti-patt
 Measures when the largest visible content element finishes rendering. Four sequential phases:
 
 | Phase | Target | What It Measures |
-|-------|--------|-----------------|
+| ------- | -------- | ----------------- |
 | TTFB | ~40% of budget | Server response time |
 | Resource Load Delay | < 10% | Time between TTFB and LCP resource fetch start |
 | Resource Load Duration | ~40% | Download time for the LCP resource |
@@ -37,7 +37,7 @@ Measures when the largest visible content element finishes rendering. Four seque
 Measures latency of all user interactions, reports the worst. Three phases:
 
 | Phase | Optimization |
-|-------|-------------|
+| ------- | ------------- |
 | Input Delay | Break long tasks, yield to browser |
 | Processing Time | Keep handlers < 50ms |
 | Presentation Delay | Minimize DOM size, avoid forced layout |
@@ -622,7 +622,7 @@ npm dedupe
 ### NX1: Not Using next/image
 
 - **Severity**: IMPORTANT
-- **Detection**: `<img ` in `.tsx` instead of `<Image>`
+- **Detection**: `<img` in `.tsx` instead of `<Image>`
 - **CWV**: LCP + CLS
 
 ```tsx
@@ -891,7 +891,7 @@ Vue 3.6+ Vapor Mode compiles templates to direct DOM operations, bypassing the v
 ## Resource Hints Quick Reference
 
 | Hint | Purpose | When to Use |
-|------|---------|-------------|
+| ------ | --------- | ------------- |
 | `preconnect` | DNS + TCP + TLS early | Critical third-party origins (API, CDN, fonts) |
 | `preload` | Fetch immediately, high priority | LCP image, critical font |
 | `prefetch` | Low priority for future navigation | Next-page assets |
@@ -904,7 +904,7 @@ Vue 3.6+ Vapor Mode compiles templates to direct DOM operations, bypassing the v
 ## Image Optimization Quick Reference
 
 | Aspect | Recommendation |
-|--------|---------------|
+| -------- | --------------- |
 | Format | WebP (25-34% smaller), AVIF (50% smaller) |
 | LCP image | `fetchpriority="high"` or framework `priority` prop |
 | Below-fold | `loading="lazy"` |
@@ -917,7 +917,7 @@ Vue 3.6+ Vapor Mode compiles templates to direct DOM operations, bypassing the v
 ## Font Loading Quick Reference
 
 | Strategy | Best For | CLS Impact |
-|----------|---------|-----------|
+| ---------- | --------- | ----------- |
 | `font-display: swap` | Body text | Slight FOUT, minimal CLS |
 | `font-display: optional` | All fonts (best CLS) | No FOUT, no CLS |
 | `next/font` | Next.js projects | Zero CLS |
@@ -930,6 +930,7 @@ Rules: preload 1-2 critical fonts only, use WOFF2, subset to needed characters, 
 ## Performance Checklist (CWV)
 
 ### LCP (< 2.5s)
+
 - [ ] LCP image has `fetchpriority="high"` or `priority` prop
 - [ ] LCP image preloaded if not in HTML source
 - [ ] No `loading="lazy"` on above-fold images
@@ -942,6 +943,7 @@ Rules: preload 1-2 critical fonts only, use WOFF2, subset to needed characters, 
 - [ ] Fonts preloaded with `font-display: swap` or `optional`
 
 ### INP (< 200ms)
+
 - [ ] Event handlers complete in < 50ms
 - [ ] Long tasks broken into smaller chunks
 - [ ] Route-based code splitting implemented
@@ -954,6 +956,7 @@ Rules: preload 1-2 critical fonts only, use WOFF2, subset to needed characters, 
 - [ ] Effect cleanup implemented (no leaking listeners/timers)
 
 ### CLS (< 0.1)
+
 - [ ] All images have `width` and `height` attributes
 - [ ] Fonts use `font-display: swap` or `optional`
 - [ ] No content injected above existing content dynamically

@@ -191,7 +191,7 @@ Key rules:
 
 ### Anchor-Safe Headings (CRITICAL)
 
-Component `## ` headings become link targets from `3-findings.md`.
+Component `##` headings become link targets from `3-findings.md`.
 
 - Use **only** letters, numbers, spaces, and hyphens
 - **FORBIDDEN in headings:** `&`, `/`, `(`, `)`, `.`, `:`, `'`, `"`, `+`, `@`, `!`
@@ -202,9 +202,7 @@ Component `## ` headings become link targets from `3-findings.md`.
 ### Template
 
 > **⛔ CRITICAL: The `## Summary` table MUST appear at the TOP of the file, immediately after `## Exploitability Tiers` and BEFORE any individual `## Component` sections. It is a navigation aid — readers need it first. The model consistently moves it to the BOTTOM — that is WRONG. Follow this exact order: `# STRIDE + Abuse Cases — Threat Analysis` → `## Exploitability Tiers` → `## Summary` → `---` → `## Component 1` → `## Component 2` → ...**
-
 > **⛔ RIGID TIER DEFINITIONS — Apply these EXACTLY. Do NOT use subjective judgment.** This is a skill directive — do NOT copy this line into the output. The tier table below is what goes into the report, WITHOUT this directive line.
-
 > **⛔ LEAKED DIRECTIVE CHECK:** The output file MUST NOT contain the text "RIGID TIER DEFINITIONS", "Do NOT use subjective judgment", or any line starting with `⛔`. These are skill instructions, not report content. If you see them in your output, remove them before finalizing.
 
 ```markdown
@@ -222,7 +220,6 @@ Threats are classified into three exploitability tiers based on the prerequisite
 ```
 
 > **⛔ COPY THE TIERS TABLE VERBATIM.** The 4th column must be `Assignment Rule` (NOT `Example`, `Description`, `Criteria`, or any other name). The cell values must be the exact text above — do NOT replace them with deployment-specific examples. Do NOT add a "Deployment context affecting tier assignment" paragraph after the table — deployment context belongs in the individual component sections, not in the tier definitions.
-
 > **⛔ STRIDE-A CATEGORY LABELS (MANDATORY — the “A” is “Abuse”, NEVER “Authorization”):**
 > The 7 STRIDE-A categories used in ALL tables (Summary, per-component Tier tables, threat-inventory.json) are:
 > **S**poofing | **T**ampering | **R**epudiation | **I**nformation Disclosure | **D**enial of Service | **E**levation of Privilege | **A**buse
@@ -259,7 +256,6 @@ Threats are classified into three exploitability tiers based on the prerequisite
 #### Tier 3 — Defense-in-Depth
 
 | ID | Category | Threat | Prerequisites | Affected Flow | Mitigation | Status |
-
 
 **⛔ STRIDE Status Column — Valid Values (must match Coverage table):**
 The `Status` column in each threat row MUST use exactly one of these values:
@@ -536,8 +532,9 @@ Include at end of Executive Summary:
 ### Action Summary Template
 
 > **⛔ FIXED PRIORITY MAPPING — The Priority column values are DETERMINISTIC, not judgment-based:**
+>
 > | Tier | Priority | Always |
-> |------|----------|--------|
+> | ------ | ---------- | -------- |
 > | Tier 1 | 🔴 Critical Risk | ALWAYS — regardless of threat/finding count |
 > | Tier 2 | 🟠 Elevated Risk | ALWAYS — regardless of threat/finding count |
 > | Tier 3 | 🟡 Moderate Risk | ALWAYS — regardless of threat/finding count |
@@ -979,6 +976,7 @@ Use these rules so repeated runs on unchanged code produce comparable inventorie
   - **Deterministic matching priority:** `source_directories` > `class_names` > `namespace` > `api_routes` > `config_keys` are all highly stable signals that survive component renames. Two components sharing any of these are almost certainly the same real component.
 
   **Fingerprint Field → Comparison Matching Signal Map:**
+
   | Fingerprint Field                  | Comparison Signal                          | Max Points | Stability                                   |
   | ---------------------------------- | ------------------------------------------ | ---------- | ------------------------------------------- |
   | `source_files`                     | Signal 2 — Source file/directory overlap   | +30        | High (files rarely move)                    |
@@ -1030,6 +1028,7 @@ Use these rules so repeated runs on unchanged code produce comparable inventorie
 ⛔ **MANDATORY:** After writing each file, verify these checks and report results. Fix any ❌ before proceeding.
 
 ### After `2-stride-analysis.md`:
+
 - [ ] Summary table appears BEFORE individual component sections
 - [ ] 3 tier sub-sections per component (Tier 1, Tier 2, Tier 3)
 - [ ] Status column uses only: `Open`, `Mitigated`, `Platform` (no `Accepted Risk`, no `Needs Review`)
@@ -1037,6 +1036,7 @@ Use these rules so repeated runs on unchanged code produce comparable inventorie
 - [ ] Every threat has single-letter STRIDE category (S/T/R/I/D/E/A)
 
 ### After `3-findings.md`:
+
 - [ ] 3 tier headings: `## Tier 1`, `## Tier 2`, `## Tier 3` (all present)
 - [ ] Zero occurrences of "Accepted Risk" anywhere in the file
 - [ ] Every finding has CVSS 4.0 vector string
@@ -1044,6 +1044,7 @@ Use these rules so repeated runs on unchanged code produce comparable inventorie
 - [ ] 4th column header is "Assignment Rule" (not "Example")
 
 ### After `threat-inventory.json`:
+
 - [ ] `threats.length == metrics.total_threats` (zero tolerance)
 - [ ] `findings.length == metrics.total_findings` (zero tolerance)
 - [ ] If threats > 50, used sub-agent/Python/chunked — NOT single `create_file`
@@ -1052,6 +1053,7 @@ Use these rules so repeated runs on unchanged code produce comparable inventorie
 - [ ] **Field names match schema exactly:** components use `display` (NOT `display_name`), threats use `stride_category` (NOT `category`), threat→component link is inside `identity_key.component_id` (NOT top-level `component_id`), threats have BOTH `title` (short name) AND `description` (longer prose) — NOT just `description` alone
 
 ### After `0-assessment.md`:
+
 - [ ] Exactly 7 sections: Report Files, Executive Summary, Action Summary, Analysis Context & Assumptions, References Consulted, Report Metadata, Classification Reference
 - [ ] `---` horizontal rule between every pair of `##` sections
 

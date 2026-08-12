@@ -1,0 +1,18 @@
+{
+  "name": "agent-cost-guardian",
+  "description": "Warn or block on high-token tool calls during development. Tracks token usage per agent run and enforces configurable limits.",
+  "version": "1.0.0",
+  "hooks": {
+    "pre-tool-use": {
+      "script": "guard-tool.sh",
+      "description": "Check token budget before allowing a tool call"
+    }
+  },
+  "config": {
+    "max_tokens_per_run": 100000,
+    "max_tokens_per_step": 16000,
+    "warn_threshold": 0.8,
+    "block_on_exceed": true,
+    "log_file": ".agent-cost-guardian.log"
+  }
+}

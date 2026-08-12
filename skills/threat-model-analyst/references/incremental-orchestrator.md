@@ -34,7 +34,7 @@ Use incremental analysis when ALL of these conditions are met:
 ## Inputs
 
 | Input | Source | Required? |
-|-------|--------|-----------|
+| ------- | -------- | ----------- |
 | Baseline report folder | Path to `threat-model-*` directory | Yes |
 | Baseline `threat-inventory.json` | `{baseline_folder}/threat-inventory.json` | Yes |
 | Baseline commit SHA | From `{baseline_folder}/0-assessment.md` Report Metadata | Yes |
@@ -208,7 +208,7 @@ Now generate all report files. **Read the relevant skill files before starting:*
 
   ⛔ **DEPLOYMENT CLASSIFICATION IS MANDATORY (even in incremental mode):**
   The `0.1-architecture.md` MUST contain:
-  1. `**Deployment Classification:** \`[VALUE]\`` line (e.g., `K8S_SERVICE`, `LOCALHOST_DESKTOP`)
+  1. `**Deployment Classification:** \`[VALUE]\`` line (e.g., `K8S_SERVICE`,`LOCALHOST_DESKTOP`)
   2. `### Component Exposure Table` with columns: Component, Listens On, Auth Required, Reachability, Min Prerequisite, Derived Tier
   If the baseline had these, carry them forward and update for new/modified components.
   If the baseline did NOT have these, **derive them from code NOW** — they are required for all subsequent steps.
@@ -281,7 +281,7 @@ This rule applies to: `0.1-architecture.md`, `2-stride-analysis.md`, `3-findings
 For each component, the STRIDE analysis approach depends on its change status:
 
 | Component Status | STRIDE Approach |
-|-----------------|-----------------|
+| ----------------- | ----------------- |
 | **Unchanged** | Carry forward all threat entries from old report with `[STILL PRESENT]` annotation. Re-verify each threat's mitigation status against current code. |
 | **Modified** | Re-analyze the component with access to the diff. For each old threat: determine if `still_present`, `fixed`, `mitigated`, or `modified`. Discover new threats from the code changes → classify as `new_in_modified`. |
 | **New** | Full fresh STRIDE-A analysis (same as single-analysis mode). All threats classified as `new_code`. |
@@ -337,7 +337,7 @@ For ALL classifications:
 For each old finding, verify against the current code:
 
 | Situation | change_status | Action |
-|-----------|---------------|--------|
+| ----------- | --------------- | -------- |
 | Code unchanged, vulnerability intact | `still_present` | Carry forward with `> **[Existing]**` on first line of body |
 | Code changed to fix the vulnerability | `fixed` | Mark with `> **[Fixed]**`, cite the specific code change |
 | Code changed partially | `partially_mitigated` | Mark with `> **[Partial]**`, explain what changed and what remains |
@@ -346,7 +346,7 @@ For each old finding, verify against the current code:
 For new findings:
 
 | Situation | change_status | Label |
-|-----------|---------------|-------|
+| ----------- | --------------- | ------- |
 | New component, new vulnerability | `new_code` | `> **[New]**` |
 | Existing component, vulnerability introduced by code change | `new_in_modified` | `> **[New]**` — cite the specific change |
 | Existing component, vulnerability was in old code but missed | `previously_unidentified` | `> **[New]**` — verify against baseline worktree |
@@ -699,7 +699,7 @@ A component's `change_status` must be consistent with its threats' and findings'
 ## Summary: Phase-by-Phase Checklist
 
 | Phase | Action | Success Criteria |
-|-------|--------|-----------------|
+| ------- | -------- | ----------------- |
 | 0 | Setup, validate inputs, worktree | All inputs exist, worktree accessible |
 | 1 | Load old inventory skeleton | All arrays populated, metrics match |
 | 2 | Per-component change detection | Every component has a `change_status` |

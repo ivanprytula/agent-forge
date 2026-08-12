@@ -21,10 +21,10 @@ applyTo: "tests/**/*.py"
 
 Two fixtures are available. Always prefer `client` for API tests:
 
-| Fixture | Type | Use for |
-|---------|------|---------|
-| `db` | `AsyncSession` | Direct CRUD function tests |
-| `client` | `httpx.AsyncClient` | API endpoint tests (most tests) |
+| Fixture   | Type                 | Use for                                    |
+| --------- | -------------------- | ------------------------------------------ |
+| `db`      | `AsyncSession`       | Direct CRUD function tests                 |
+| `client`  | `httpx.AsyncClient`  | API endpoint tests (most tests)            |
 
 **How they work:**
 - `db` creates the full schema (`create_all`), yields a session, then tears down (`drop_all`) — each test gets a clean database

@@ -20,6 +20,7 @@ This file is the **single source of truth** for all verification rules that must
 > **Skeleton compliance rule:** Every output file MUST follow its skeleton's section order, table column headers, and heading names. Do NOT add sections/tables not in the skeleton. Do NOT rename skeleton headings.
 
 ### After writing `3-findings.md`:
+
 - [ ] First finding heading starts with `### FIND-01:` (not `F01`, `F-01`, or `Finding 1`)
 - [ ] Every finding has these exact row labels: `SDL Bugbar Severity`, `Remediation Effort`, `Mitigation Type`, `Exploitability Tier`, `Exploitation Prerequisites`, `Component`
 - [ ] Every CVSS value contains `CVSS:4.0/` prefix
@@ -39,8 +40,9 @@ This file is the **single source of truth** for all verification rules that must
 - [ ] **Coverage table column names** are exactly `Threat ID | Finding ID | Status` — NOT `Threat | Finding | Status`
 
 ### After writing `0-assessment.md`:
-- [ ] First `## ` heading is `## Report Files`
-- [ ] Count `## ` headings — exactly 7 with these exact names: Report Files, Executive Summary, Action Summary, Analysis Context & Assumptions, References Consulted, Report Metadata, Classification Reference
+
+- [ ] First `##` heading is `## Report Files`
+- [ ] Count `##` headings — exactly 7 with these exact names: Report Files, Executive Summary, Action Summary, Analysis Context & Assumptions, References Consulted, Report Metadata, Classification Reference
 - [ ] Heading contains `&` not `and`: search for `Analysis Context & Assumptions`
 - [ ] Count `---` separator lines — at least 5
 - [ ] `### Quick Wins` heading exists
@@ -70,6 +72,7 @@ This file is the **single source of truth** for all verification rules that must
 - [ ] **Risk Rating heading** has NO emojis: `### Risk Rating: Elevated` not `### Risk Rating: 🟠 Elevated`
 
 ### After writing `0.1-architecture.md`:
+
 - [ ] Count `sequenceDiagram` occurrences — at least 3
 - [ ] First 3 sequence diagrams have `participant` lines and `->>` message arrows (not empty diagram blocks)
 - [ ] Key Components table row count matches Component Diagram node count
@@ -80,6 +83,7 @@ This file is the **single source of truth** for all verification rules that must
 - [ ] `## Repository Structure` section exists (not missing)
 
 ### After writing `1.1-threatmodel.mmd`:
+
 - [ ] Line 1 starts with `%%{init:`
 - [ ] Contains `classDef process`, `classDef external`, `classDef datastore`
 - [ ] No Chakra UI colors (`#4299E1`, `#48BB78`, `#E53E3E`)
@@ -88,11 +92,12 @@ This file is the **single source of truth** for all verification rules that must
 - [ ] **Incremental DFD styling (incremental mode only)**: If new components exist, verify `classDef newComponent fill:#d4edda,stroke:#28a745` is present AND new component nodes use `:::newComponent` (NOT `:::process`). If removed components exist, verify `classDef removedComponent` with gray dashed styling. ❌ `newComponent fill:#6baed6` (same blue as process) → FAIL (visually invisible).
 
 ### After writing `2-stride-analysis.md`:
+
 - [ ] `## Summary` appears BEFORE any `## ComponentName` section (check line numbers)
 - [ ] Summary table has columns: `| Component | Link | S | T | R | I | D | E | A | Total | T1 | T2 | T3 | Risk |` — search for `| S | T | R | I | D | E | A |` to verify
 - [ ] Summary table S/T/R/I/D/E/A columns contain numeric values (0, 1, 2, 3...), NOT all identical 1s for every component
 - [ ] Every component has `#### Tier 1`, `#### Tier 2`, `#### Tier 3` sub-headings
-- [ ] No `&`, `/`, `(`, `)`, `:` in `## ` headings
+- [ ] No `&`, `/`, `(`, `)`, `:` in `##` headings
 - [ ] **No status tags in headings (ANY file)**: Search ALL `.md` files for `^##.+\[Existing\]`, `^##.+\[Fixed\]`, `^##.+\[Partial\]`, `^##.+\[New\]`, `^##.+\[Removed\]`, and same for `###` headings. Also check old-style: `^##.+\[STILL`, `^##.+\[NEW`, `^###.+\[STILL`, `^###.+\[NEW CODE`. ❌ Tags in headings break anchor links and pollute ToC. Status must be on first line of section body as a blockquote (`> **[Tag]**`), not in the heading.
 - [ ] **CRITICAL — A = Abuse, NEVER Authorization**: Search for `| Authorization |` in the file. If ANY match is a STRIDE category label (not inside a threat description sentence) → FIX IMMEDIATELY by replacing with `| Abuse |`. The "A" in STRIDE-A stands for "Abuse" (business logic abuse, workflow manipulation, feature misuse). This is the single most common error observed.
 - [ ] **N/A entries not counted**: If any component has `N/A — {justification}` for a STRIDE category, verify that category shows `0` (not `1`) in the Summary table
@@ -105,6 +110,7 @@ This file is the **single source of truth** for all verification rules that must
 - [ ] **Exploitability Tiers 4th column**: The tier definition table must have 4th column named `Assignment Rule` (NOT `Example`, `Description`, `Criteria`)
 
 ### After writing `incremental-comparison.html` (incremental mode only):
+
 - [ ] HTML contains `Trust Boundaries` or `Boundaries` in the metrics bar — search for the text "Boundaries"
 - [ ] STRIDE heatmap has 13 columns: Component, S, T, R, I, D, E, A, Total, divider, T1, T2, T3 — search for `T1` and `T2` and `T3` in the HTML
 - [ ] Fixed/New/Previously Unidentified status information appears ONLY in colored status cards, NOT also as small inline badges in the metrics bar
@@ -117,16 +123,19 @@ This file is the **single source of truth** for all verification rules that must
 - [ ] **Status cards are concise**: Each status card's `card-items` div must contain only a short summary sentence. ❌ Threat IDs (T06.S, T02.E), finding IDs (FIND-14), or component names listed in cards → FAIL. Search for `T\d+\.` and `FIND-\d+` inside `card-items` divs. Detailed item breakdowns belong in the Threat/Finding Status Breakdown section, not in the summary cards.
 
 ### After writing any incremental report file (incremental mode — inline check):
+
 - [ ] **Simplified display tags only**: Search ALL `.md` files for old-style tags: `[STILL PRESENT]`, `[NEW CODE]`, `[NEW IN MODIFIED]`, `[PREVIOUSLY UNIDENTIFIED]`, `[PARTIALLY MITIGATED]`, `[REMOVED WITH COMPONENT]`, `[MODIFIED]`. ❌ Any match → FAIL. Replace with simplified tags: `[Existing]`, `[Fixed]`, `[Partial]`, `[New]`, `[Removed]`.
 - [ ] **Valid display tags**: Every finding/threat annotation uses exactly one of the 5 simplified tags: `[Existing]`, `[Fixed]`, `[Partial]`, `[New]`, `[Removed]`. Tags must appear as blockquote on first line of body: `> **[Tag]**`.
 - [ ] **Component status simplified**: Component status column uses only: `Unchanged`, `Modified`, `New`, `Removed`. ❌ `Restructured` → FAIL (use `Modified` instead).
 - [ ] **Change Summary tables use simplified tags**: Threat Status table has 4 rows (Existing/Fixed/New/Removed). Finding Status table has 5 rows (Existing/Fixed/Partial/New/Removed). ❌ Old-style rows like `Still Present`, `New (Code)`, `Partially Mitigated` → FAIL.
 
 ### After writing `threat-inventory.json` (inline check):
+
 - [ ] **JSON threat count matches STRIDE file**: Count unique threat IDs in `2-stride-analysis.md` (grep `^\| T\d+\.`). This count MUST equal `threats` array length in the JSON. If STRIDE has MORE threats than JSON → threats were dropped during serialization. Rebuild the JSON.
 - [ ] **JSON metrics internally consistent**: `metrics.total_threats` must equal `threats` array length. `metrics.total_findings` must equal `findings` array length.
 
 ### After writing `0-assessment.md` (count validation):
+
 - [ ] Element count in Executive Summary matches actual Element Table row count (re-read `1-threatmodel.md` if needed)
 - [ ] Finding count matches actual `### FIND-` heading count in `3-findings.md`
 - [ ] Threat count matches Total from summary table in `2-stride-analysis.md`
@@ -196,7 +205,7 @@ These are the most frequently observed deviations across all previous runs. Afte
 
 ### 0.7 Canonical Pattern Checks
 
-- [ ] **Finding heading pattern** — All finding headings match `^### FIND-\d{2}: ` (never `F01`, `F-01`, `Finding 1`)
+- [ ] **Finding heading pattern** — All finding headings match `^### FIND-\d{2}:` (never `F01`, `F-01`, `Finding 1`)
 - [ ] **CVSS prefix pattern** — All CVSS fields match `\d+\.\d+ \(CVSS:4\.0/AV:` (never bare `AV:N/AC:L/...`)
 - [ ] **Related Threats link pattern** — Every Related Threat token matches `\[T\d{2}\.[STRIDEA]\]\(2-stride-analysis\.md#[a-z0-9-]+\)`
 - [ ] **Assessment section headings exact set** — Exactly these `##` headings in `0-assessment.md`: Report Files, Executive Summary, Action Summary, Analysis Context & Assumptions, References Consulted, Report Metadata, Classification Reference
@@ -249,7 +258,7 @@ These checks validate each file independently. They can run in parallel.
 - [ ] **Summary table** includes columns: Component, Link, S, T, R, I, D, E, A, Total, T1, T2, T3, Risk
 - [ ] **Every component** has `## Component Name` heading followed by Tier 1, Tier 2, Tier 3 sub-sections (all three present even if empty)
 - [ ] **Empty tiers** use "*No Tier N threats identified for this component.*"
-- [ ] **Anchor-safe headings**: No `## ` heading in this file contains ANY of these characters: `&`, `/`, `(`, `)`, `.`, `:`, `'`, `"`, `+`, `@`, `!`. Replace: `&` → `and`, `/` → `-`, parentheses → omit, `:` → omit.
+- [ ] **Anchor-safe headings**: No `##` heading in this file contains ANY of these characters: `&`, `/`, `(`, `)`, `.`, `:`, `'`, `"`, `+`, `@`, `!`. Replace: `&` → `and`, `/` → `-`, parentheses → omit, `:` → omit.
 - [ ] **Pod Co-location line** present for K8s components listing co-located sidecars
 - [ ] **STRIDE Status values** — Every threat row's Status column uses exactly one of: `Open`, `Mitigated`, `Platform`. No `Partial`, `N/A`, or other ad-hoc values.
 - [ ] **A category labeled Abuse** — Search `2-stride-analysis.md` for `| Authorization |` as a STRIDE category label. FAIL if found. The "A" in STRIDE-A is always "Abuse" (business logic abuse, workflow manipulation, feature misuse), NEVER "Authorization". Also check N/A entries: `Authorization — N/A` is WRONG, must be `Abuse — N/A`.
@@ -312,8 +321,8 @@ These checks validate each file independently. They can run in parallel.
 - [ ] **Analysis Started** and **Analysis Completed** fields present with UTC timestamps from `Get-Date` commands
 - [ ] **Duration** field present — computed from Analysis Started and Analysis Completed timestamps
 - [ ] **Metadata values in backticks** — Every value cell in the Report Metadata table must be wrapped in backticks. Spot-check at least 5 rows.
-- [ ] **Horizontal rules between sections** — Count lines matching `---` in the file. Must be ≥ 6 (one between each pair of the 7 `## ` sections).
-- [ ] **Classification Reference is last section** — `## Classification Reference` present as the final `## ` heading. Contains a single 2-column table (`Classification | Values`) with rows for: Exploitability Tiers, STRIDE + Abuse, SDL Severity, Remediation Effort, Mitigation Type, Threat Status, CVSS, CWE, OWASP. ❌ Missing section or wrong format → FAIL.
+- [ ] **Horizontal rules between sections** — Count lines matching `---` in the file. Must be ≥ 6 (one between each pair of the 7 `##` sections).
+- [ ] **Classification Reference is last section** — `## Classification Reference` present as the final `##` heading. Contains a single 2-column table (`Classification | Values`) with rows for: Exploitability Tiers, STRIDE + Abuse, SDL Severity, Remediation Effort, Mitigation Type, Threat Status, CVSS, CWE, OWASP. ❌ Missing section or wrong format → FAIL.
 - [ ] **Classification Reference is static** — Values in the table must match the skeleton EXACTLY (copied verbatim). No additional rows, no modified descriptions. Compare against `skeleton-assessment.md` Classification Reference section.
 - [ ] **No forbidden section headings** — Search for: `Severity Distribution`, `Architecture Risk Areas`, `Methodology Notes`, `Deliverables`, `Priority Remediation Roadmap`, `Key Recommendations`, `Top Recommendations`. Must return 0 matches.
 - [ ] **Action Summary tier priorities are FIXED** — In the Action Summary table of `0-assessment.md`, verify the Priority column: Tier 1 = `🔴 Critical Risk`, Tier 2 = `🟠 Elevated Risk`, Tier 3 = `🟡 Moderate Risk`. ❌ Tier 1 with Low/Moderate/Elevated → FAIL. ❌ Tier 2 with Critical/Low → FAIL. These are FIXED labels that never change regardless of threat/finding counts.
@@ -372,7 +381,7 @@ These checks validate relationships between files. They require reading multiple
 - [ ] **Every element** in the `1-threatmodel.md` Element Table that is a Process has a corresponding `## Component` section in `2-stride-analysis.md`
 - [ ] **No orphaned components** in `2-stride-analysis.md` that don't appear in the Element Table
 - [ ] **Summary table component count** matches the number of `## Component` sections in the file
-- [ ] **Component count exact match** — Count rows in `0.1-architecture.md` Key Components table (excluding header/separator). Count `## ` component sections in `2-stride-analysis.md` (excluding `## Exploitability Tiers`, `## Summary`). These counts MUST be equal.
+- [ ] **Component count exact match** — Count rows in `0.1-architecture.md` Key Components table (excluding header/separator). Count `##` component sections in `2-stride-analysis.md` (excluding `## Exploitability Tiers`, `## Summary`). These counts MUST be equal.
 
 ### 3.2 Data Flow Coverage (STRIDE ↔ DFD)
 

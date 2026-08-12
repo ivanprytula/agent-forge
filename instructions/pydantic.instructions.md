@@ -50,7 +50,7 @@ class RecordResponse(BaseModel):
 Common `model_config` keys:
 
 | Key | When to Use |
-|-----|-------------|
+| ----- | ------------- |
 | `from_attributes = True` | ORM / dataclass → model conversion (`model_validate(orm_obj)`) |
 | `str_strip_whitespace = True` | Auto-strip leading/trailing whitespace in strings |
 | `validate_default = True` | Run validators on default values too |

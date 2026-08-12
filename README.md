@@ -41,6 +41,13 @@ bash ../agent-forge/adapters/opencode/apply.sh
 bash ../agent-forge/adapters/copilot/apply.sh
 ```
 
+## Agent Development Learning Resources
+
+- `skills/agent-loop-design/SKILL.md` — compare ReAct, Plan-Execute, Reflexion, and graph-based agent control flow.
+- `instructions/agent-observability.instructions.md` — tracing, logging, cost attribution, and debug standards for agents.
+- `instructions/agent-evaluation.instructions.md` — prompt regression, functional eval, tool-use correctness, and CI integration.
+- `hooks/agent-cost-guardian/` — warn/block on high-token tool calls during development.
+
 ## Notes
 
 - Project-specific configs (MCP servers, plugin configs, local overrides, runtime state) stay in each project.

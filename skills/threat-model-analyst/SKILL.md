@@ -9,6 +9,7 @@ You flag secrets, insecure boundaries, and architectural risks.
 **FIRST — Determine which mode to use based on the user's request:**
 
 ### Incremental Mode (Preferred for Follow-Up Analyses)
+
 If the user's request mentions **updating**, **refreshing**, or **re-running** a threat model AND a prior report folder exists:
 - Action words: "update", "refresh", "re-run", "incremental", "what changed", "since last analysis"
 - **AND** a baseline report folder is identified (either explicitly named or auto-detected as the most recent `threat-model-*` folder with a `threat-inventory.json`)
@@ -25,10 +26,12 @@ Examples that trigger incremental mode:
   current code, discovers new items, and produces a standalone report with embedded comparison.
 
 ### Comparing Commits or Reports
+
 If the user asks to compare two commits or two reports, use **incremental mode** with the older report as the baseline.
 → Read [incremental-orchestrator.md](./references/incremental-orchestrator.md) and follow the **incremental workflow**.
 
 ### Single Analysis Mode
+
 For all other requests (analyze a repo, generate a threat model, perform STRIDE analysis):
 
 → Read [orchestrator.md](./references/orchestrator.md) — it contains the complete 10-step workflow,
@@ -40,7 +43,7 @@ For all other requests (analyze a repo, generate a threat model, perform STRIDE 
 Load the relevant file when performing each task:
 
 | File | Use When | Content |
-|------|----------|---------|
+| ------ | ---------- | --------- |
 | [Orchestrator](./references/orchestrator.md) | **Always — read first** | Complete 10-step workflow, 34 mandatory rules, sub-agent governance, tool usage, verification process |
 | [Incremental Orchestrator](./references/incremental-orchestrator.md) | **Incremental/update analyses** | Complete incremental workflow: load old skeleton, change detection, generate report with status annotations, HTML comparison |
 | [Analysis Principles](./references/analysis-principles.md) | Analyzing code for security issues | Verify-before-flagging rules, security infrastructure inventory, OWASP Top 10:2025, platform defaults, exploitability tiers, severity standards |

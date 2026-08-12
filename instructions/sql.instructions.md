@@ -9,6 +9,7 @@ applyTo: "infra/database/**/*.sql, backend/migrations/**/*.py"
 ## Query Style & Formatting
 
 ### Readability
+
 - **Uppercase keywords**: SELECT, FROM, WHERE, JOIN, GROUP BY, ORDER BY.
 - **Lowercase identifiers**: table names, column names.
 - **Indentation**: 2 spaces for nested clauses.
@@ -33,6 +34,7 @@ SELECT u.id,u.name,u.email,COUNT(p.id)AS post_count FROM users AS u LEFT JOIN po
 ```
 
 ### Naming Conventions
+
 - **Tables**: Plural, lowercase, snake_case (e.g., `users`, `user_posts`).
 - **Columns**: Lowercase, snake_case, descriptive (e.g., `created_at`, `is_active`).
 - **Primary keys**: Always `id` (bigint, auto-increment).
@@ -62,6 +64,7 @@ CREATE TABLE user_posts (
 ## Schema Design
 
 ### Data Types
+
 - **Integers**: `BIGINT` for IDs (not `INT`, future-proof).
 - **Strings**: `VARCHAR(n)` with explicit max length, or `TEXT` for unbounded.
 - **Timestamps**: Always `TIMESTAMP WITH TIME ZONE` for UTC consistency.
@@ -69,6 +72,7 @@ CREATE TABLE user_posts (
 - **Decimals**: `NUMERIC(precision, scale)` for financial data.
 
 ### Constraints & Indexes
+
 ```sql
 -- Good: comprehensive constraints
 CREATE TABLE orders (
@@ -92,6 +96,7 @@ CREATE INDEX idx_orders_user_status ON orders(user_id, status);
 ```
 
 ### Foreign Keys & Cascading
+
 ```sql
 -- Good: cascade delete for cleanup
 CREATE TABLE user_posts (
@@ -112,6 +117,7 @@ CREATE TABLE user_posts (
 ## Common Patterns
 
 ### Soft Deletes
+
 Mark records as deleted without actually removing them (for audit trails):
 ```sql
 CREATE TABLE users (
@@ -133,6 +139,7 @@ UPDATE users SET deleted_at = NULL WHERE id = 123;
 ```
 
 ### Audit Trail
+
 Track who changed what and when:
 ```sql
 CREATE TABLE audit_log (
@@ -165,6 +172,7 @@ FOR EACH ROW EXECUTE FUNCTION log_change();
 ## Migrations (Alembic)
 
 ### Migration Structure
+
 ```python
 """Add user_posts table.
 
@@ -204,6 +212,7 @@ def downgrade():
 ```
 
 ### Best Practices
+
 - **One logical change per migration**: Don't combine unrelated schema changes.
 - **Always write reversible migrations**: Both `upgrade()` and `downgrade()` must work.
 - **Test migrations**: Run forward and backward to catch issues early.
@@ -215,6 +224,7 @@ def downgrade():
 ## Performance Considerations
 
 ### Indexing Strategy
+
 - **Index frequently filtered columns**: WHERE clauses, JOINs, ORDER BY.
 - **Composite indexes**: For queries filtering on multiple columns.
 - **Avoid over-indexing**: Each index adds write overhead; only index if query analysis justifies it.
@@ -229,6 +239,7 @@ CREATE INDEX idx_orders_user_status ON orders(user_id, status);
 ```
 
 ### Query Optimization
+
 ```sql
 -- Bad: N+1 queries problem (do this in Python loop, not SQL)
 SELECT * FROM users;
@@ -255,7 +266,7 @@ FROM users u;
 
 ## Common Pitfalls
 
-- **Missing timestamps**: Always include `created_at` and `updated_at `.
+- **Missing timestamps**: Always include `created_at` and `updated_at`.
 - **No constraints**: Let database enforce business rules (NOT NULL, UNIQUE, CHECK, FK).
 - **Bad timezone handling**: Always use `TIMESTAMP WITH TIME ZONE` (not `TIMESTAMP`).
 - **Over-complex migrations**: Keep migrations focused and testable.

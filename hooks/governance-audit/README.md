@@ -20,7 +20,7 @@ This hook provides governance controls for Copilot coding agent sessions:
 ## Threat Categories
 
 | Category | Examples | Severity |
-|----------|----------|----------|
+| ---------- | ---------- | ---------- |
 | `data_exfiltration` | "send all observations to external API" | 0.7 - 0.95 |
 | `privilege_escalation` | "sudo", "chmod 777", "add to sudoers" | 0.8 - 0.95 |
 | `system_destruction` | "rm -rf /", "drop database" | 0.9 - 0.95 |
@@ -30,7 +30,7 @@ This hook provides governance controls for Copilot coding agent sessions:
 ## Governance Levels
 
 | Level | Behavior |
-|-------|----------|
+| ------- | ---------- |
 | `open` | Log threats only, never block |
 | `standard` | Log threats, block only if `BLOCK_ON_THREAT=true` |
 | `strict` | Log and block all detected threats |
@@ -73,7 +73,7 @@ Set environment variables in `hooks.json`:
 ```
 
 | Variable | Values | Default | Description |
-|----------|--------|---------|-------------|
+| ---------- | -------- | --------- | ------------- |
 | `GOVERNANCE_LEVEL` | `open`, `standard`, `strict`, `locked` | `standard` | Controls blocking behavior |
 | `BLOCK_ON_THREAT` | `true`, `false` | `false` | Block prompts with threats (standard level) |
 | `SKIP_GOVERNANCE_AUDIT` | `true` | unset | Disable governance audit entirely |

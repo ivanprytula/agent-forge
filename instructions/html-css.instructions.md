@@ -9,6 +9,7 @@ applyTo: "**/*.html, **/*.css, src/**/*.css"
 ## HTML Best Practices
 
 ### Semantic HTML
+
 Use semantic tags for better accessibility and SEO:
 ```html
 <!-- Good: semantic structure -->
@@ -42,6 +43,7 @@ Use semantic tags for better accessibility and SEO:
 ```
 
 ### Accessibility (A11y)
+
 - Always include `alt` text for images.
 - Use proper heading hierarchy (H1 → H2 → H3, no skipping).
 - Ensure sufficient color contrast (WCAG AA minimum 4.5:1).
@@ -61,6 +63,7 @@ Use semantic tags for better accessibility and SEO:
 ```
 
 ### Meta Tags & SEO
+
 ```html
 <head>
   <meta charset="UTF-8">
@@ -76,6 +79,7 @@ Use semantic tags for better accessibility and SEO:
 ## CSS Best Practices
 
 ### Methodology: BEM (Block Element Modifier)
+
 ```css
 /* Block: independent component */
 .card { }
@@ -91,6 +95,7 @@ Use semantic tags for better accessibility and SEO:
 ```
 
 ### Selectors
+
 - **Prefer classes**: Use `.class` over element selectors (`div`) or IDs.
 - **Avoid nesting**: Keep specificity low; don't nest more than 2-3 levels.
 - **Organize logically**: Group related rules, use comments for sections.
@@ -120,6 +125,7 @@ div > p.text > .content > button#submit {
 ```
 
 ### Responsive Design
+
 Use mobile-first approach with media queries:
 ```css
 /* Default: mobile */
@@ -145,6 +151,7 @@ Use mobile-first approach with media queries:
 ```
 
 ### CSS Variables (Custom Properties)
+
 ```css
 :root {
   --color-primary: #007bff;
@@ -166,6 +173,7 @@ Use mobile-first approach with media queries:
 ```
 
 ### Flexbox & Grid
+
 Prefer modern layout techniques over floats:
 ```css
 /* Flex: 1D layout */
@@ -195,6 +203,7 @@ Prefer modern layout techniques over floats:
 ## Common Patterns
 
 ### Cards
+
 ```html
 <div class="card">
   <img src="scenario.png" alt="Scenario thumbnail" class="card__image">
@@ -246,6 +255,7 @@ Prefer modern layout techniques over floats:
 ## Performance
 
 ### Critical CSS
+
 Inline critical CSS above the fold:
 ```html
 <head>
@@ -259,6 +269,7 @@ Inline critical CSS above the fold:
 ```
 
 ### Minimize HTTP Requests
+
 - Combine multiple CSS files into one.
 - Use CSS variables instead of SCSS for simplicity.
 - Defer non-critical stylesheets with `media="print"` or JavaScript.
@@ -268,10 +279,12 @@ Inline critical CSS above the fold:
 ## Linting & Formatting
 
 ### Recommended Tools
+
 - **Stylelint**: Catch CSS errors and enforce conventions.
 - **Prettier**: Auto-format HTML and CSS.
 
 ### `.stylelintrc.json`
+
 ```json
 {
   "extends": ["stylelint-config-standard"],

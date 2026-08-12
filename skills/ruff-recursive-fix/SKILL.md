@@ -100,9 +100,9 @@ ruff check src/data --select F,E9,I
 
 1. Run `<ruff_cmd> check` with the selected scope and options.
 2. Classify findings by type:
-	- Autofixable safe.
-	- Autofixable unsafe.
-	- Not autofixable.
+ - Autofixable safe.
+ - Autofixable unsafe.
+ - Not autofixable.
 3. If no findings remain, stop.
 
 ### 2. Safe Autofix Pass

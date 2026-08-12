@@ -43,7 +43,7 @@ For every finding:
 Before STRIDE-A analysis, identify ALL security-enabling components present in the codebase:
 
 | Category | Components to Look For | Security They Provide |
-|----------|----------------------|----------------------|
+| ---------- | ---------------------- | ---------------------- |
 | Service Mesh | Dapr, Istio, Linkerd, Consul Connect | mTLS, traffic policies, observability |
 | Certificate Management | Sentry, cert-manager, Vault PKI | Automatic cert issuance/rotation |
 | Authentication | MISE, OAuth2-proxy, Dex, Keycloak | Token validation, SSO |
@@ -123,7 +123,7 @@ Apply these frameworks during analysis:
    After completing the security infrastructure inventory (Step 1), detect the deployment pattern:
 
    | Pattern | Detection Signal | Platform Limit |
-   |---------|-----------------|----------------|
+   | --------- | ----------------- | ---------------- |
    | **K8s Operator** | `controller-runtime`, `kubebuilder`, or `operator-sdk` in go.mod/go.sum; `Reconcile()` functions in source | **≤35%** |
    | **Standalone Application** | All other repos (web apps, CLI tools, services) | **≤20%** |
 
@@ -142,7 +142,7 @@ Apply these frameworks during analysis:
 **After completing STRIDE analysis**, scan the codebase for each technology below. For every technology found, verify the corresponding security checks are covered in findings or documented as mitigated. This catches specific vulnerabilities that component-level STRIDE often misses.
 
 | Technology Found | MUST Check For | Common Finding |
-|-----------------|---------------|----------------|
+| ----------------- | --------------- | ---------------- |
 | **Redis** | `requirepass` disabled, no TLS, no ACL | Auth disabled by default → finding |
 | **Milvus** | `authorizationEnabled: false`, no TLS, public gRPC port | Auth disabled by default → finding |
 | **PostgreSQL/SQL DB** | Superuser usage, `ssl=false`, SQL injection, connection string credentials | Input validation + auth |
@@ -170,7 +170,7 @@ Apply these frameworks during analysis:
 Check for these vulnerability categories during analysis:
 
 | ID | Category | Check For |
-|----|----------|----------|
+| ---- | ---------- | ---------- |
 | A01 | Broken Access Control | Missing authZ, privilege escalation, IDOR, CORS misconfig |
 | A02 | Security Misconfiguration | Default creds, verbose errors, unnecessary features, missing hardening |
 | A03 | Software Supply Chain Failures | Vulnerable dependencies, malicious packages, compromised CI/CD |
@@ -191,7 +191,7 @@ Reference: https://owasp.org/Top10/2025/
 Before flagging missing security, check these common secure-by-default behaviors:
 
 | Platform | Feature | Default Behavior | How to Verify |
-|----------|---------|------------------|---------------|
+| ---------- | --------- | ------------------ | --------------- |
 | **Dapr** | mTLS | Enabled when Sentry deployed | Check for `dapr_sentry` or `sentry` component |
 | **Dapr** | Access Control | Deny if policies defined | Look for `accessControl` in Configuration |
 | **Kubernetes** | RBAC | Enabled since v1.6 | Check `--authorization-mode` includes RBAC |
@@ -214,7 +214,7 @@ Before flagging missing security, check these common secure-by-default behaviors
 Threats are classified into three exploitability tiers based on prerequisites:
 
 | Tier | Label | Prerequisites | Assignment Rule |
-|------|-------|---------------|----------------|
+| ------ | ------- | --------------- | ---------------- |
 | **Tier 1** | Direct Exposure | `None` | Exploitable by unauthenticated external attacker with NO prior access. |
 | **Tier 2** | Conditional Risk | Single prerequisite | Requires exactly ONE form of access: `Authenticated User`, `Privileged User`, `Internal Network`, or single `{Boundary} Access`. |
 | **Tier 3** | Defense-in-Depth | Multiple prerequisites or infrastructure access | Requires `Host/OS Access`, `Admin Credentials`, `{Component} Compromise`, `Physical Access`, or multiple prerequisites with `+`. |
@@ -226,7 +226,7 @@ Threats are classified into three exploitability tiers based on prerequisites:
 Prerequisites MUST use only these values (closed enum). The tier follows mechanically:
 
 | Prerequisite | Tier | Rationale |
-|-------------|------|----------|
+| ------------- | ------ | ---------- |
 | `None` | **Tier 1** | Unauthenticated external attacker, no prior access |
 | `Authenticated User` | **Tier 2** | Requires valid credentials |
 | `Privileged User` | **Tier 2** | Requires admin/operator role |
@@ -283,7 +283,7 @@ Prerequisites MUST use only these values (closed enum). The tier follows mechani
 **Platform-Specific Evidence Sources:**
 
 | Platform | Where to check exposure | Internal indicator | External indicator |
-|----------|------------------------|--------------------|--------------------|
+| ---------- | ------------------------ | -------------------- | -------------------- |
 | **Kubernetes** | Service type, Ingress rules, values.yaml | `ClusterIP` service, no Ingress | `LoadBalancer`/`NodePort`, Ingress path exists |
 | **Docker Compose** | `ports:` mapping, network config | No `ports:` mapping, internal network only | `ports: "8080:8080"` maps to host |
 | **Azure App Service** | App settings, access restrictions | VNet integration, private endpoint | Public URL, no IP restrictions |
@@ -304,7 +304,7 @@ Prerequisites MUST use only these values (closed enum). The tier follows mechani
 **After assigning CVSS vectors AND tiers, cross-check for contradictions:**
 
 | CVSS Metric | Value | Tier Implication |
-|-------------|-------|------------------|
+| ------------- | ------- | ------------------ |
 | `AV:L` (Attack Vector: Local) | Requires local access | **Cannot be Tier 1** — must be T2 or T3 |
 | `AV:A` (Attack Vector: Adjacent) | Requires adjacent network | **Cannot be Tier 1** — must be T2 or T3 |
 | `AV:P` (Attack Vector: Physical) | Requires physical access | **Must be Tier 3** |
@@ -327,7 +327,7 @@ Before assigning tiers, determine the system's deployment model from code, docs,
 **Deployment Classifications and their tier implications:**
 
 | Classification | Description | T1 Allowed? | Min Prerequisite |
-|----------------|-------------|-------------|------------------|
+| ---------------- | ------------- | ------------- | ------------------ |
 | `LOCALHOST_DESKTOP` | Console/GUI app, no network listeners (or localhost-only), single-user workstation | ❌ **NO** — all findings T2+ | `Host/OS Access` (T3) or `Local Process Access` (T2) |
 | `LOCALHOST_SERVICE` | Daemon/service binding to 127.0.0.1 only | ❌ **NO** — all findings T2+ | `Local Process Access` (T2) |
 | `AIRGAPPED` | No internet connectivity | ❌ for network-originated attacks | `Internal Network` |
@@ -339,7 +339,7 @@ Before assigning tiers, determine the system's deployment model from code, docs,
 **Legacy override table (still applies as fallback):**
 
 | Deployment Indicator | Tier Override Rule |
-|---------------------|-------------------|
+| --------------------- | ------------------- |
 | Binds to `localhost`/`127.0.0.1` only | Cannot be T1 — requires local access (T2 minimum) |
 | Air-gapped / no internet | Downgrade network-based attacks by one tier |
 | Single-admin workstation tool | Cannot be T1 unless exploitable by a non-admin local user |
@@ -386,27 +386,33 @@ Before documenting each finding, verify:
 ## Severity Standards
 
 ### SDL Bugbar Severity
+
 Classify each finding per: https://www.microsoft.com/en-us/msrc/sdlbugbar
 
 ### CVSS 4.0 Score
+
 Use CVSS v4.0 Base score (0.0-10.0) with vector string.
 Reference: https://www.first.org/cvss/v4.0/specification-document
 
 ### CWE
+
 Assign Common Weakness Enumeration ID and name.
 Reference: https://cwe.mitre.org/
 
 ### OWASP
+
 Map to OWASP Top 10:2025 category if applicable (A01-A10).
 **ALWAYS use `:2025` suffix** (e.g., `A01:2025`), never `:2021`.
 Reference: https://owasp.org/Top10/2025/
 
 ### Remediation Effort
+
 - **Low**: Configuration change, flag toggle, or single-file fix
 - **Medium**: Multi-file code change, new validation logic, or dependency update
 - **High**: Architecture change, new component, or cross-team coordination
 
 ### STRIDE Scope Rule
+
 - **External services** (AzureOpenAI, AzureAD, Redis, PostgreSQL) **DO get** STRIDE sections — they are attack surfaces from your system's perspective
 - **External actors** (Operator, EndUser) **do NOT get** STRIDE sections — they are threat sources, not targets
 - If you have 20 elements and 2 are external actors, you write 18 STRIDE sections
@@ -414,6 +420,7 @@ Reference: https://owasp.org/Top10/2025/
 **⚠️ DO NOT include time estimates.** Never add "(hours)", "(days)", "(weeks)", "~1 hour", "~2 hours", or any duration/effort-to-fix estimates anywhere in the output. The effort level (Low/Medium/High) is sufficient.
 
 ### Mitigation Type (OWASP-aligned)
+
 - **Redesign**: Eliminate the threat by changing architecture (OWASP: Avoid)
 - **Standard Mitigation**: Apply well-known, proven security controls (OWASP: Mitigate)
 - **Custom Mitigation**: Implement a bespoke code fix specific to this system (OWASP: Mitigate)

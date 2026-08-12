@@ -260,7 +260,7 @@ For this project (Week 1), all queries are single-table, so this is not yet a co
 ## Execution Methods
 
 | Method | Use for | Returns |
-|--------|---------|---------|
+| -------- | --------- | --------- |
 | `await session.execute(stmt)` | All queries | `CursorResult` — iterate via `.scalars()`, `.all()`, etc. |
 | `await session.get(Model, pk)` | PK lookups | `Model \| None` directly |
 | `await session.commit()` | Persist inserts/updates/deletes | `None` — side effect is persistence |

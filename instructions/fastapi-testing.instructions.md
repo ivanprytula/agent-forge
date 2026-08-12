@@ -132,7 +132,7 @@ assert body["pagination"]["has_more"] is True
 Every route needs at minimum:
 
 | Test | Status Code | Pattern |
-|------|------------|---------|
+| ------ | ------------ | --------- |
 | Happy path | 2xx | full shape assertion |
 | Not found | 404 | use non-existent ID `99999` |
 | Validation error | 422 | missing field, bad value, or violated constraint |

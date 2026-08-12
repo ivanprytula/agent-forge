@@ -309,6 +309,7 @@ For each decision, note:
 - Document architectural documentation practices
 
 ### ${INCLUDES_DECISION_RECORDS ? "17" : INCLUDES_CODE_EXAMPLES ? "16" : "15"}. Blueprint for New Development
+
 Create a clear architectural guide for implementing new features:
 
 - **Development Workflow**:

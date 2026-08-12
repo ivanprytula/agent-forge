@@ -9,12 +9,14 @@ applyTo: "docs/**/*.md, **/*.md, README.md"
 ## Document Structure
 
 ### Hierarchy & Headings
+
 - Use H1 (`#`) for document title (only one per file).
 - Use H2 (`##`) for major sections.
 - Use H3 (`###`) for subsections.
 - Avoid skipping heading levels (e.g., don't jump from H2 to H4).
 
 ### Example Structure
+
 ```markdown
 # Scenario 1: Monolith Scaling Bottleneck
 
@@ -58,12 +60,14 @@ applyTo: "docs/**/*.md, **/*.md, README.md"
 ## Formatting & Style
 
 ### Text Formatting
+
 - **Bold**: `**important**` for emphasis.
 - **Code**: `` `code` `` for inline code (function names, variables, commands).
 - **Inline links**: `[Text](url)` for readability.
 - **Lists**: Consistent bullet style (use `-` for unordered, `1.` for ordered).
 
 ### Code Blocks
+
 ```markdown
 Use triple backticks with language identifier for syntax highlighting:
 
@@ -84,6 +88,7 @@ services:
 ```
 
 ### Tables
+
 ```markdown
 | Column 1 | Column 2 | Column 3 |
 |----------|----------|----------|
@@ -96,6 +101,7 @@ services:
 ## Documentation Best Practices
 
 ### README.md Structure (for Scenarios)
+
 ```markdown
 # Scenario 1: Monolith Scaling Bottleneck
 
@@ -115,6 +121,7 @@ cd src/scenario_1_monolith/scripts
 ```
 
 ### Check Health
+
 \`\`\`bash
 curl http://localhost:8000/health
 \`\`\`
@@ -126,9 +133,11 @@ curl http://localhost:8000/health
 ## Phases
 
 ### Phase 1: Baseline (Unoptimized)
+
 Expected behavior at normal load. Metrics: latency ~50ms, throughput ~200 req/s.
 
 ### Phase 2: Breaking Point
+
 Run load test with k6:
 \`\`\`bash
 k6 run scripts/load_test.js
@@ -136,10 +145,14 @@ k6 run scripts/load_test.js
 Expected failure: latency spikes to 5000ms+, errors appear at ~50 concurrent users.
 
 ### Phase 3: Fix (Add Redis Cache)
+
 Apply caching pattern:
 \`\`\`bash
+
 # Uncomment cache logic in backend/app/api.py
+
 # Restart services
+
 docker-compose restart web cache
 \`\`\`
 Expected improvement: latency drops to 50ms, throughput increases to 2000 req/s.
@@ -147,17 +160,19 @@ Expected improvement: latency drops to 50ms, throughput increases to 2000 req/s.
 ## API Endpoints
 
 | Method | Path | Description |
-|--------|------|-------------|
+| -------- | ------ | ------------- |
 | GET | `/users` | List all users |
 | GET | `/users/{id}` | Get user by ID |
 | POST | `/users` | Create user |
 
 ## Cleanup
+
 \`\`\`bash
 ./scripts/cleanup.sh
 \`\`\`
 
 ## Further Reading
+
 - [12-Factor App on Caching](https://12factor.net/)
 - [Redis Best Practices](https://redis.io/docs/)
 ```
@@ -182,6 +197,7 @@ Refer to [Getting Started Guide](../docs/QUICKSTART.md) for setup instructions.
 ```
 
 ### Code References
+
 Link to specific files or lines in the codebase (workspace-relative):
 ```markdown
 The database setup is in [app/database.py](../../app/database.py).
@@ -190,6 +206,7 @@ See the async session pattern in [database.py:get_db()](../../app/database.py#L2
 ```
 
 ### External Links
+
 ```markdown
 Learn more in the [12-Factor App](https://12factor.net/) guide.
 See [ByteByteGo's Caching Guide](https://bytebytego.com/guides/).
@@ -200,6 +217,7 @@ See [ByteByteGo's Caching Guide](https://bytebytego.com/guides/).
 ## Special Formatting
 
 ### Callout Blocks
+
 ```markdown
 > **Note**: This is important context readers should know.
 
@@ -209,6 +227,7 @@ See [ByteByteGo's Caching Guide](https://bytebytego.com/guides/).
 ```
 
 ### Code Diff
+
 ```markdown
 \`\`\`diff
 - # Old way (no caching)
