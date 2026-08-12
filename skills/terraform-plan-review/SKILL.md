@@ -1,11 +1,3 @@
----
-name: terraform-plan-review
-description: "Review an aws-dev Terraform plan before suggesting apply. Covers replacement/deletion, state drift, lifecycle guards, provider locking, cost, and the EC2 MVP contract."
-metadata:
-  applyTo: "terraform/**/*.tf, terraform/**/*.tfvars.example"
-argument-hint: "environment: aws-dev"
----
-
 # Terraform Plan Review — Skill
 
 Purpose: catch destructive or risky changes in a `terraform plan` before they reach `apply`, and make sure

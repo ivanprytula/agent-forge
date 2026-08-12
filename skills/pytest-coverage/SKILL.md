@@ -1,4 +1,4 @@
-The goal is for the tests to cover all lines of code.
+# Pytest Coverage
 
 Generate a coverage report with:
 

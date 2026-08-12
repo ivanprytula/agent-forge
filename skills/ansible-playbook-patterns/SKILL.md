@@ -1,11 +1,3 @@
----
-name: ansible-playbook-patterns
-description: "Ansible development patterns for the AWS MVP bootstrap. Covers idempotency, ansible-lint conventions, tagging, and the SSM-operated aws_dev inventory."
-metadata:
-  applyTo: "ansible/**/*.yml, ansible/**/*.yaml, ansible.cfg"
-argument-hint: "concern: idempotency|linting|tagging|inventory"
----
-
 # Ansible Playbook Patterns — Skill
 
 Purpose: keep the AWS MVP bootstrap idempotent, lintable, and consistent with the SSM inventory.

@@ -16,7 +16,7 @@ Centralized, agent-agnostic skills and instructions repo for the `api-obs-stack`
 
 This repo is designed to live as a sibling to your project repos:
 
-```
+```text
 api-obs-stack/
 ├── agent-forge/
 ├── api-observatory/

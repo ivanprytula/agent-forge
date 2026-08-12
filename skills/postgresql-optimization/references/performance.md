@@ -150,6 +150,7 @@ SELECT * FROM users WHERE data @> '{"role": "admin"}';
 ## Optimization Checklist
 
 ### Query Analysis
+
 - [ ] Run EXPLAIN ANALYZE for expensive queries
 - [ ] Check for sequential scans on large tables
 - [ ] Verify appropriate join algorithms
@@ -157,6 +158,7 @@ SELECT * FROM users WHERE data @> '{"role": "admin"}';
 - [ ] Analyze sort and aggregation operations
 
 ### Index Strategy
+
 - [ ] Create indexes for frequently queried columns
 - [ ] Use composite indexes for multi-column searches
 - [ ] Consider partial indexes for filtered queries
@@ -164,6 +166,7 @@ SELECT * FROM users WHERE data @> '{"role": "admin"}';
 - [ ] Monitor index bloat and fragmentation
 
 ### Performance Monitoring
+
 - [ ] Set up query performance monitoring
 - [ ] Configure appropriate log settings
 - [ ] Monitor connection pool usage

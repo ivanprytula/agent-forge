@@ -1,10 +1,3 @@
-name: async-patterns
-description: "Comprehensive async Python patterns for FastAPI + SQLAlchemy apps. Covers practical patterns (batch inserts, pagination, retries, rate-limiting, background tasks, connection-pool tuning, validators) and core async concepts (coroutines, event loop, Task vs Future, cancellation, timeouts, structured concurrency). Includes step-by-step implementation guidance and testing checklist."
-metadata:
-  applyTo: "app/**/*.py, src/**/*.py, **/*.py"
-argument-hint: "pattern: batch|pagination|retry|rate-limit|background-tasks|connection-pool|validator|structured-concurrency|timeouts"
----
-
 # Async Patterns — Skill
 
 Purpose: implement production-ready async patterns with concise explanations, safe implementations, and tests.

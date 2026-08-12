@@ -6,21 +6,6 @@ This skill is inspired by [Karpathy's autoresearch](https://github.com/karpathy/
 
 ---
 
-## Agent Behavior Rules
-
-1. **DO** guide the user through the Setup phase interactively before starting the loop.
-2. **DO** establish a baseline measurement before making any changes.
-3. **DO** commit every experiment attempt before running it (so it can be reverted cleanly).
-4. **DO** keep a results log (TSV) tracking every experiment.
-5. **DO** revert changes that do not improve the metric (git reset to last known good).
-6. **DO** run autonomously once the loop starts -- never pause to ask "should I continue?".
-7. **DO NOT** modify files the user marked as out-of-scope.
-8. **DO NOT** skip the measurement step -- every experiment must be measured.
-9. **DO NOT** keep changes that regress the metric unless the user explicitly allowed trade-offs.
-10. **DO NOT** install new dependencies or make environment changes unless the user approved it.
-
----
-
 ## Phase 1: Setup (Interactive)
 
 Before any experimentation begins, work with the user to establish these parameters.
@@ -127,30 +112,6 @@ Ask the user to confirm. Do not proceed until confirmed.
 
 ---
 
-## Phase 2: Branch & Baseline
-
-Once the user confirms:
-
-1. **Create a branch**: Propose a tag based on today's date (e.g., `autoresearch/mar17`).
-   Create the branch: `git checkout -b autoresearch/<tag>`.
-
-2. **Read in-scope files**: Read all files that are in scope to build full context of the current state.
-
-3. **Initialize results.tsv**: Create `results.tsv` in the repo root with the header row:
-   ```
-   experiment	commit	metric	status	description
-   ```
-   Add `results.tsv` and `run.log` to `.git/info/exclude` (append if not already present) so they stay untracked without modifying any tracked files.
-
-4. **Run the baseline**: Execute the metric command on the current unmodified code.
-   Record the result as experiment `0` with status `baseline` in `results.tsv`.
-
-5. **Report baseline** to the user:
-   > Baseline established: **[metric_name] = [value]**
-   > Starting autonomous experimentation loop.
-
----
-
 ## Phase 3: Experiment Loop
 
 Run this loop continuously. Do not stop to ask the user. Run until:
@@ -214,23 +175,6 @@ When generating experiment ideas, follow this priority order:
 - **Time budget**: If a run exceeds 2x the expected duration, kill it and treat as a crash.
 - **Existing tests**: If constraints require tests to pass, run them before/after and revert if they break.
 - **Memory/resources**: Monitor and revert if resource usage exceeds stated limits.
-
----
-
-## Phase 4: Reporting
-
-When the loop ends (budget reached or user interrupts):
-
-1. **Print the full results.tsv** as a formatted table.
-2. **Summarize**:
-   - Total experiments run
-   - Experiments kept / discarded / crashed
-   - Starting metric (baseline) vs. final metric
-   - Improvement percentage
-   - Top 3 most impactful changes
-3. **Show the cumulative git log** of kept experiments:
-   `git log --oneline <start_commit>..HEAD`
-4. **Recommend next steps**: Based on the results, suggest what a human researcher might try next (ideas that were too risky/complex for automated experimentation).
 
 ---
 
