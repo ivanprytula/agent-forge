@@ -8,7 +8,7 @@ AGENT_FORGE="$(cd "$REPO_ROOT/../agent-forge" && pwd)"
 mkdir -p "$REPO_ROOT/.opencode/skills"
 link="$REPO_ROOT/.opencode/skills/agent-forge"
 if [ ! -e "$link" ]; then
-    ln -s "../../agent-forge/skills" "$link"
+        ln -s "../../../agent-forge/skills" "$link"
     echo "Created symlink: $link"
 fi
 

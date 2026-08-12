@@ -10,7 +10,7 @@ for skill_dir in "$AGENT_FORGE"/skills/*/; do
     skill_name="$(basename "$skill_dir")"
     link="$REPO_ROOT/.kilo/skills/$skill_name"
     if [ ! -e "$link" ]; then
-        ln -s "../../agent-forge/skills/$skill_name" "$link"
+        ln -s "../../../agent-forge/skills/$skill_name" "$link"
         echo "Created symlink: $link"
     fi
 done
