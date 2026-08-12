@@ -37,7 +37,7 @@
 **Configuration:**
 - `pyproject.toml` — repo metadata and tooling config
 - `.pre-commit-config.yaml` — lint/format hooks
-- `.markdownlint.yaml`, `.markdownlint-cli2.jsonc` — markdown rules
+- `.markdownlint-cli2.jsonc` — markdown rules
 
 **Tests:**
 - _(none yet — add `tests/` when CI/eval scripts are added)_
@@ -62,7 +62,7 @@
 ### Code Style
 
 - Follow PEP 8 for Python.
-- Markdown: follow `.markdownlint.yaml` rules.
+- Markdown: follow `.markdownlint-cli2.jsonc` rules.
 - Skill SKILL.md files: follow [Agent Skills spec](https://agentskills.io/specification).
 
 ### Dependencies

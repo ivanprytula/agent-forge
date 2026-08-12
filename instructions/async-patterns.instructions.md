@@ -874,7 +874,7 @@ execution in threads. Use processes for CPU parallelism.
 
 ## See Also
 
-- [Lambda & Functional Programming](lambda): Anonymous functions and functional tools
+- Lambda & Functional Programming: Anonymous functions and functional tools
 - [Error Handling & Logging](python.instructions.md#error-handling--logging): Structured logging in
   async code
 - [Testing (pytest + pytest-asyncio)](python.instructions.md#testing-pytest--pytest-asyncio):
