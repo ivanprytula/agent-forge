@@ -4,12 +4,13 @@ set -euo pipefail
 REPO_ROOT="$(pwd)"
 AGENT_FORGE="$(cd "$REPO_ROOT/../agent-forge" && pwd)"
 
-# 1. Create .opencode/skills/agent-forge symlink
+# 1. Install self-improving-agent skill into .opencode/skills/
 mkdir -p "$REPO_ROOT/.opencode/skills"
-link="$REPO_ROOT/.opencode/skills/agent-forge"
-if [ ! -e "$link" ]; then
-        ln -s "../../../agent-forge/skills" "$link"
-    echo "Created symlink: $link"
+if [ ! -d "$REPO_ROOT/.opencode/skills/self-improving-agent" ]; then
+    cp -R "$AGENT_FORGE/skills/self-improving-agent" "$REPO_ROOT/.opencode/skills/self-improving-agent"
+    echo "Installed .opencode/skills/self-improving-agent"
+else
+    echo ".opencode/skills/self-improving-agent already exists, skipping"
 fi
 
 # 2. Copy SECURITY.md if missing

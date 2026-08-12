@@ -47,6 +47,8 @@ bash ../agent-forge/adapters/copilot/apply.sh
 - `instructions/agent-observability.instructions.md` — tracing, logging, cost attribution, and debug standards for agents.
 - `instructions/agent-evaluation.instructions.md` — prompt regression, functional eval, tool-use correctness, and CI integration.
 - `hooks/agent-cost-guardian/` — warn/block on high-token tool calls during development.
+- `skills/self-improving-agent/SKILL.md` — capture learnings, errors, and corrections; promote recurring patterns to `AGENTS.md` or new skills.
+- `.learnings/` — project-local learning logs (`LEARNINGS.md`, `ERRORS.md`, `FEATURE_REQUESTS.md`); gitignored by default.
 
 ## Notes
 

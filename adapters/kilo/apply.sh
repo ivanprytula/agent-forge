@@ -4,16 +4,14 @@ set -euo pipefail
 REPO_ROOT="$(pwd)"
 AGENT_FORGE="$(cd "$REPO_ROOT/../agent-forge" && pwd)"
 
-# 1. Create .kilo/skills symlinks
+# 1. Install self-improving-agent skill into .kilo/skills/
 mkdir -p "$REPO_ROOT/.kilo/skills"
-for skill_dir in "$AGENT_FORGE"/skills/*/; do
-    skill_name="$(basename "$skill_dir")"
-    link="$REPO_ROOT/.kilo/skills/$skill_name"
-    if [ ! -e "$link" ]; then
-        ln -s "../../../agent-forge/skills/$skill_name" "$link"
-        echo "Created symlink: $link"
-    fi
-done
+if [ ! -d "$REPO_ROOT/.kilo/skills/self-improving-agent" ]; then
+    cp -R "$AGENT_FORGE/skills/self-improving-agent" "$REPO_ROOT/.kilo/skills/self-improving-agent"
+    echo "Installed .kilo/skills/self-improving-agent"
+else
+    echo ".kilo/skills/self-improving-agent already exists, skipping"
+fi
 
 # 2. Copy agent-manager.example.json if missing
 if [ ! -f "$REPO_ROOT/.kilo/agent-manager.json" ]; then

@@ -17,7 +17,16 @@ if [ ! -f "$REPO_ROOT/.copilot/README.md" ]; then
     echo "Created .copilot/README.md"
 fi
 
-# 2. Update .github/copilot-instructions.md
+# 2. Install self-improving-agent skill into .github/copilot/skills/
+mkdir -p "$REPO_ROOT/.github/copilot/skills"
+if [ ! -d "$REPO_ROOT/.github/copilot/skills/self-improving-agent" ]; then
+    cp -R "$AGENT_FORGE/skills/self-improving-agent" "$REPO_ROOT/.github/copilot/skills/self-improving-agent"
+    echo "Installed .github/copilot/skills/self-improving-agent"
+else
+    echo ".github/copilot/skills/self-improving-agent already exists, skipping"
+fi
+
+# 3. Update .github/copilot-instructions.md
 copilot_instr="$REPO_ROOT/.github/copilot-instructions.md"
 if [ -f "$copilot_instr" ]; then
     if ! grep -q 'agent-forge' "$copilot_instr"; then

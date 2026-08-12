@@ -11,7 +11,37 @@ if [ ! -f "$REPO_ROOT/.claude/.gitignore" ]; then
     echo "Created .claude/.gitignore"
 fi
 
-# 2. Update CLAUDE.md with Shared Agent Standards section
+# 2. Install self-improving-agent skill into .claude/skills/
+mkdir -p "$REPO_ROOT/.claude/skills"
+if [ ! -d "$REPO_ROOT/.claude/skills/self-improving-agent" ]; then
+    cp -R "$AGENT_FORGE/skills/self-improving-agent" "$REPO_ROOT/.claude/skills/self-improving-agent"
+    echo "Installed .claude/skills/self-improving-agent"
+else
+    echo ".claude/skills/self-improving-agent already exists, skipping"
+fi
+
+# 3. Create .claude/settings.json with hooks if missing
+settings="$REPO_ROOT/.claude/settings.json"
+if [ ! -f "$settings" ]; then
+    mkdir -p "$REPO_ROOT/.claude"
+    cat > "$settings" << EOF
+{
+  "hooks": {
+    "UserPromptSubmit": [{
+      "hooks": [{
+        "type": "command",
+        "command": "\${CLAUDE_PROJECT_DIR}/.claude/skills/self-improving-agent/scripts/activator.sh"
+      }]
+    }]
+  }
+}
+EOF
+    echo "Created .claude/settings.json with self-improvement hooks"
+else
+    echo ".claude/settings.json already exists, skipping"
+fi
+
+# 4. Update CLAUDE.md with Shared Agent Standards section
 claude_md="$REPO_ROOT/CLAUDE.md"
 if [ -f "$claude_md" ]; then
     if ! grep -q 'Shared Agent Standards' "$claude_md"; then
