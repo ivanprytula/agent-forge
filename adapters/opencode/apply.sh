@@ -4,14 +4,11 @@ set -euo pipefail
 REPO_ROOT="$(pwd)"
 AGENT_FORGE="$(cd "$REPO_ROOT/../agent-forge" && pwd)"
 
-# 1. Install self-improving-agent skill into .opencode/skills/
-mkdir -p "$REPO_ROOT/.opencode/skills"
-if [ ! -d "$REPO_ROOT/.opencode/skills/self-improving-agent" ]; then
-    cp -R "$AGENT_FORGE/skills/self-improving-agent" "$REPO_ROOT/.opencode/skills/self-improving-agent"
-    echo "Installed .opencode/skills/self-improving-agent"
-else
-    echo ".opencode/skills/self-improving-agent already exists, skipping"
-fi
+# shellcheck source=../adapters/lib.sh
+source "$AGENT_FORGE/adapters/lib.sh"
+
+# 1. Refresh all skills from agent-forge into .opencode/skills/
+refresh_all_skills "$AGENT_FORGE" "$REPO_ROOT/.opencode/skills"
 
 # 2. Copy SECURITY.md if missing
 if [ ! -f "$REPO_ROOT/SECURITY.md" ]; then

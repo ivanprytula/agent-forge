@@ -4,6 +4,9 @@ set -euo pipefail
 REPO_ROOT="$(pwd)"
 AGENT_FORGE="$(cd "$REPO_ROOT/../agent-forge" && pwd)"
 
+# shellcheck source=../adapters/lib.sh
+source "$AGENT_FORGE/adapters/lib.sh"
+
 # 1. Copy agent config files if missing
 if [ ! -f "$REPO_ROOT/.copilot/AGENT_COMMANDS.md" ]; then
     mkdir -p "$REPO_ROOT/.copilot"
@@ -17,38 +20,26 @@ if [ ! -f "$REPO_ROOT/.copilot/README.md" ]; then
     echo "Created .copilot/README.md"
 fi
 
-# 2. Install self-improving-agent skill into .github/copilot/skills/
-mkdir -p "$REPO_ROOT/.github/copilot/skills"
-if [ ! -d "$REPO_ROOT/.github/copilot/skills/self-improving-agent" ]; then
-    cp -R "$AGENT_FORGE/skills/self-improving-agent" "$REPO_ROOT/.github/copilot/skills/self-improving-agent"
-    echo "Installed .github/copilot/skills/self-improving-agent"
-else
-    echo ".github/copilot/skills/self-improving-agent already exists, skipping"
-fi
+# 2. Refresh all skills from agent-forge into .github/copilot/skills/
+refresh_all_skills "$AGENT_FORGE" "$REPO_ROOT/.github/copilot/skills"
 
-# 3. Update .github/copilot-instructions.md
+# 3. Add compact Shared Standards reference to copilot-instructions.md if missing
 copilot_instr="$REPO_ROOT/.github/copilot-instructions.md"
 if [ -f "$copilot_instr" ]; then
-    if ! grep -q 'agent-forge' "$copilot_instr"; then
+    if ! grep -q 'Shared Standards' "$copilot_instr"; then
         cat >> "$copilot_instr" << 'EOF'
 
-## Shared Agent Standards
+## Shared Standards
 
-This project uses centralized agent standards from `agent-forge`:
+Centralized standards in `../agent-forge/`:
+- Skills → `../agent-forge/skills/<name>/SKILL.md` (linked into `.github/copilot/skills/`)
+- Instructions → `../agent-forge/instructions/<topic>.instructions.md`
+- Read the matching file before producing significant code in that area.
+
 EOF
-        for skill_dir in "$AGENT_FORGE"/skills/*/; do
-            skill_name="$(basename "$skill_dir")"
-            echo "- **$skill_name** → ../agent-forge/skills/$skill_name/SKILL.md" >> "$copilot_instr"
-        done
-        echo "" >> "$copilot_instr"
-        for instr in "$AGENT_FORGE"/instructions/*.instructions.md; do
-            instr_name="$(basename "$instr")"
-            echo "- $instr_name → ../agent-forge/instructions/$instr_name" >> "$copilot_instr"
-        done
-        echo "" >> "$copilot_instr"
-        echo "Updated .github/copilot-instructions.md with agent-forge references"
+        echo "Added Shared Standards section to copilot-instructions.md"
     else
-        echo ".github/copilot-instructions.md already references agent-forge, skipping"
+        echo "copilot-instructions.md already has Shared Standards, skipping"
     fi
 fi
 

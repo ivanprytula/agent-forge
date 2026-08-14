@@ -74,6 +74,7 @@
 
 - Write clear, atomic commits. One logical change per commit.
 - Commit messages should describe **what** changed and **why**.
+- **Never git push code unless explicitly given such a task.**
 
 ---
 
@@ -90,6 +91,10 @@
 - **Never commit `.learnings/` entries** — they are developer-local logs.
 
 ---
+
+## Mode gating
+
+At the start of each turn, check the current execution mode (ask, code, plan, etc.) before performing file operations. In ask/read-only modes, only read files; never write, edit, or execute side-effecting commands. File writes and edits are permitted only in code/plan modes.
 
 ## Patterns & Gotchas
 
@@ -128,7 +133,7 @@ When a workflow repeats — especially across projects — promote it to a skill
 
 1. **Stale map?** If you discover that the Codebase Map above doesn't match reality, **update it now** before continuing your task. Don't leave it for later.
 
-2. **User correction?** If a human corrects your behavior (e.g., "don't use that API", "run tests this way"), add the correction to the appropriate section of this file (Local Norms, Guardrails, or Patterns & Gotchas) so future sessions inherit it.
+2. **User correction?** If a human corrects your behavior (e.g., "don't use that API", "run tests this way"), add the correction to the appropriate section of this file (Local Norms, Guardrails, or Patterns & Gotchas) **before continuing any other work**. Do not defer this to the end of the task. Future sessions depend on it.
 
 3. **Repeated friction?** If you notice yourself doing the same multi-step workflow more than once, consider creating a new skill in `skills/`. Use the [self-improving-agent skill](skills/self-improving-agent/SKILL.md) for the procedure.
 

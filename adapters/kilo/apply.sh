@@ -4,14 +4,11 @@ set -euo pipefail
 REPO_ROOT="$(pwd)"
 AGENT_FORGE="$(cd "$REPO_ROOT/../agent-forge" && pwd)"
 
-# 1. Install self-improving-agent skill into .kilo/skills/
-mkdir -p "$REPO_ROOT/.kilo/skills"
-if [ ! -d "$REPO_ROOT/.kilo/skills/self-improving-agent" ]; then
-    cp -R "$AGENT_FORGE/skills/self-improving-agent" "$REPO_ROOT/.kilo/skills/self-improving-agent"
-    echo "Installed .kilo/skills/self-improving-agent"
-else
-    echo ".kilo/skills/self-improving-agent already exists, skipping"
-fi
+# shellcheck source=../adapters/lib.sh
+source "$AGENT_FORGE/adapters/lib.sh"
+
+# 1. Refresh all skills from agent-forge into .kilo/skills/
+refresh_all_skills "$AGENT_FORGE" "$REPO_ROOT/.kilo/skills"
 
 # 2. Copy agent-manager.example.json if missing
 if [ ! -f "$REPO_ROOT/.kilo/agent-manager.json" ]; then
@@ -19,7 +16,7 @@ if [ ! -f "$REPO_ROOT/.kilo/agent-manager.json" ]; then
     echo "Created .kilo/agent-manager.json"
 fi
 
-# 3. Update AGENTS.md progressive-loading routes
+# 3. Update AGENTS.md progressive-loading routes (idempotent)
 agents_md="$REPO_ROOT/AGENTS.md"
 if [ -f "$agents_md" ]; then
     if ! grep -q 'agent-forge/instructions/' "$agents_md"; then
