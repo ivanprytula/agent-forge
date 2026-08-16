@@ -14,6 +14,8 @@
 .
 ├── AGENTS.md                 # This file — repo memory for agents
 ├── skills/                   # Agent skill definitions (SKILL.md with frontmatter)
+│   ├── manifest.json         # Skill catalog for runtime discovery
+│   ├── index.md              # Human-readable skill index with triggers
 │   └── self-improving-agent/ # Meta-skill: capture learnings, promote to AGENTS.md, extract skills
 ├── instructions/             # Shared progressive-loading instruction files
 ├── hooks/                    # Normalized hook definitions + scripts
@@ -31,7 +33,7 @@
 
 **Entry points:**
 - `adapters/` — idempotent setup scripts for Kilo, Claude Code, OpenCode, Copilot
-- `skills/` — installable skill folders, each with `SKILL.md`
+- `skills/` — installable skill folders, each with `SKILL.md`; see `manifest.json` for discovery
 - `hooks/` — reusable hook scripts keyed by agent
 
 **Configuration:**
@@ -115,6 +117,8 @@ This repo includes reusable skills in the `skills/` directory. Skills are agent 
 | ------------------------------------------------------------ | ----------------------------------------------------------- | ----------------------------------------------------------- |
 | [self-improving-agent](skills/self-improving-agent/SKILL.md) | Improve this AGENTS.md, create new skills, encode learnings | After completing a task, or when noticing repeated friction |
 
+For the full catalog, see `skills/index.md` or parse `skills/manifest.json`.
+
 ### Using Skills
 
 - Read the skill's `SKILL.md` when the trigger condition is met.
@@ -125,7 +129,40 @@ This repo includes reusable skills in the `skills/` directory. Skills are agent 
 
 When a workflow repeats — especially across projects — promote it to a skill. Use the `self-improving-agent` skill for guidance on when and how.
 
+### Skill Discovery
+
+Skills are **not** eagerly loaded into context. Use the lightweight `skills/manifest.json` or `skills/index.md` to discover available skills by name, description, and trigger. Load the full `SKILL.md` only when the trigger matches the current task.
+
+## Token Budget
+
+Approximate context cost for always-loaded vs. on-demand content:
+
+| Content | Approx tokens | When loaded |
+|---------|--------------|-------------|
+| `agent-behavior.instructions.md` | ~150–250 | Always |
+| `skills/manifest.json` | ~500–800 | Always (discovery) |
+| `skills/index.md` | ~200–350 | Always (discovery) |
+| Any single SKILL.md | ~1,000–4,000 | On trigger match |
+| Any single instruction file | ~500–2,500 | On applyTo match |
+| `references/*.md` | ~500–3,000 | On explicit demand |
+
+Before loading a skill or reference file, estimate its token cost against the remaining
+context budget. Prefer the core SKILL.md first; load references only when the specific
+section is needed. If a step approaches 60% context utilization, compact before continuing.
+
 ---
+
+## Instructions Loading
+
+Instruction files in `instructions/` use YAML frontmatter with an `applyTo` glob pattern to enable conditional loading:
+
+```yaml
+---
+applyTo: "app/**/*.py"
+---
+```
+
+Only load the instruction file when the files you are touching match its `applyTo` pattern. See `instructions/python.instructions.md` for an example. This prevents loading all 12,000+ lines of instructions into every agent session.
 
 ## Self-Correction Protocol
 

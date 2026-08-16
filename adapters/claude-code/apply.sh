@@ -14,8 +14,6 @@ if [ ! -f "$REPO_ROOT/.claude/.gitignore" ]; then
     echo "Created .claude/.gitignore"
 fi
 
-# 2. Refresh all skills from agent-forge into .claude/skills/
-refresh_all_skills "$AGENT_FORGE" "$REPO_ROOT/.claude/skills"
 
 # 3. Create .claude/settings.json with hooks if missing
 settings="$REPO_ROOT/.claude/settings.json"
@@ -27,7 +25,7 @@ if [ ! -f "$settings" ]; then
     "UserPromptSubmit": [{
       "hooks": [{
         "type": "command",
-        "command": "\${CLAUDE_PROJECT_DIR}/.claude/skills/self-improving-agent/scripts/activator.sh"
+        "command": "\${CLAUDE_PROJECT_DIR}/../agent-forge/skills/self-improving-agent/scripts/activator.sh"
       }]
     }]
   }
@@ -38,23 +36,20 @@ else
     echo ".claude/settings.json already exists, skipping"
 fi
 
-# 4. Add compact Shared Standards reference to CLAUDE.md if missing
+# 4. Add compact skill discovery reference to CLAUDE.md if missing
 claude_md="$REPO_ROOT/CLAUDE.md"
 if [ -f "$claude_md" ]; then
-    if ! grep -q 'Shared Standards' "$claude_md"; then
+    if ! grep -q 'Skill Discovery' "$claude_md"; then
         cat >> "$claude_md" << 'EOF'
 
-## Shared Standards
+## Skill Discovery
 
-Centralized standards in `../agent-forge/`:
-- Skills → `../agent-forge/skills/<name>/SKILL.md` (linked into `.claude/skills/`)
-- Instructions → `../agent-forge/instructions/<topic>.instructions.md`
-- Read the matching file before producing significant code in that area.
+For a lightweight catalog of all available skills, see `../agent-forge/skills/manifest.json` or `../agent-forge/skills/index.md`. Load the full `SKILL.md` only when the task matches the skill's trigger.
 
 EOF
-        echo "Added Shared Standards section to CLAUDE.md"
+        echo "Added Skill Discovery section to CLAUDE.md"
     else
-        echo "CLAUDE.md already has Shared Standards, skipping"
+        echo "CLAUDE.md already has Skill Discovery, skipping"
     fi
 fi
 

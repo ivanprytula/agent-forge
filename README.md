@@ -4,7 +4,7 @@ Centralized, agent-agnostic skills and instructions repo for the `api-obs-stack`
 
 ## Structure
 
-- `skills/` — Agent skill definitions (SKILL.md with frontmatter stripped)
+- `skills/` — Agent skill definitions (SKILL.md with frontmatter)
 - `instructions/` — Shared progressive-loading instruction files
 - `hooks/` — Normalized hook definitions + scripts
 - `prompts/` — Reusable prompt templates
@@ -43,7 +43,7 @@ bash ../agent-forge/adapters/copilot/apply.sh
 
 ## Agent Development Learning Resources
 
-- `skills/agent-loop-design/SKILL.md` — compare ReAct, Plan-Execute, Reflexion, and graph-based agent control flow.
+- `instructions/agent-loop-design.instructions.md` — compare ReAct, Plan-Execute, Reflexion, and graph-based agent control flow.
 - `instructions/agent-observability.instructions.md` — tracing, logging, cost attribution, and debug standards for agents.
 - `instructions/agent-evaluation.instructions.md` — prompt regression, functional eval, tool-use correctness, and CI integration.
 - `hooks/agent-cost-guardian/` — warn/block on high-token tool calls during development.

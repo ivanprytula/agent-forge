@@ -191,7 +191,7 @@ Expected improvement: latency drops to 50ms, throughput increases to 2000 req/s.
 ### Internal Links
 Link to related docs:
 ```markdown
-See [Python Code Standards](./.github/instructions/python.instructions.md) for async patterns.
+See [Python Code Standards](../instructions/python.instructions.md) for async patterns.
 
 Refer to [Getting Started Guide](../docs/QUICKSTART.md) for setup instructions.
 ```

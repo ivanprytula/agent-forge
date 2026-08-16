@@ -20,26 +20,20 @@ if [ ! -f "$REPO_ROOT/.copilot/README.md" ]; then
     echo "Created .copilot/README.md"
 fi
 
-# 2. Refresh all skills from agent-forge into .github/copilot/skills/
-refresh_all_skills "$AGENT_FORGE" "$REPO_ROOT/.github/copilot/skills"
-
-# 3. Add compact Shared Standards reference to copilot-instructions.md if missing
+# 3. Add compact Skill Discovery reference to copilot-instructions.md if missing
 copilot_instr="$REPO_ROOT/.github/copilot-instructions.md"
 if [ -f "$copilot_instr" ]; then
-    if ! grep -q 'Shared Standards' "$copilot_instr"; then
+    if ! grep -q 'Skill Discovery' "$copilot_instr"; then
         cat >> "$copilot_instr" << 'EOF'
 
-## Shared Standards
+## Skill Discovery
 
-Centralized standards in `../agent-forge/`:
-- Skills → `../agent-forge/skills/<name>/SKILL.md` (linked into `.github/copilot/skills/`)
-- Instructions → `../agent-forge/instructions/<topic>.instructions.md`
-- Read the matching file before producing significant code in that area.
+For a lightweight catalog of all available skills, see `../agent-forge/skills/manifest.json` or `../agent-forge/skills/index.md`. Load the full `SKILL.md` only when the task matches the skill's trigger.
 
 EOF
-        echo "Added Shared Standards section to copilot-instructions.md"
+        echo "Added Skill Discovery section to copilot-instructions.md"
     else
-        echo "copilot-instructions.md already has Shared Standards, skipping"
+        echo "copilot-instructions.md already has Skill Discovery, skipping"
     fi
 fi
 

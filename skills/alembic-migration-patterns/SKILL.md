@@ -1,3 +1,8 @@
+---
+name: alembic-migration-patterns
+description: Manage schema migrations across multiple services with isolated Alembic histories, additive changes, batch operations, index strategies, and idempotent data migrations. Use when creating or reviewing migrations in alembic/ or services/*/alembic/ directories.
+---
+
 # alembic-migration-patterns
 
 Manage schema migrations across multiple services with isolated Alembic histories.

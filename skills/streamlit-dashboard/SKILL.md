@@ -1,3 +1,8 @@
+---
+name: streamlit-dashboard
+description: Build the Streamlit dashboard UI using the project's framework-agnostic core and adapter pattern. Use when modifying or extending services/dashboard/ui/streamlit/ panels, adapters, or the core dashboard layer.
+---
+
 # streamlit-dashboard
 
 Build the Streamlit dashboard UI using the project's framework-agnostic core and adapter pattern.

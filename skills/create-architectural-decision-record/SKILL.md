@@ -1,3 +1,8 @@
+---
+name: create-architectural-decision-record
+description: Create a structured Architectural Decision Record (ADR) document with front matter, context, decision, consequences, alternatives, and implementation notes. Use when the user requests an ADR, architecture decision, design decision record, or needs to document a significant technical choice with alternatives and trade-offs.
+---
+
 # Create Architectural Decision Record
 
 Create an ADR document for `${input:DecisionTitle}` using structured formatting optimized for AI consumption and human readability.

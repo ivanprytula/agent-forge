@@ -1,6 +1,6 @@
 ---
 applyTo: '**'
-description: 'Comprehensive web performance standards based on Core Web Vitals (LCP, INP, CLS), with 50+ anti-patterns, detection regex, framework-specific fixes for modern web frameworks, and modern API guidance.'
+description: "Web performance standards based on Core Web Vitals (LCP, INP, CLS). Use when auditing, reviewing, or improving frontend performance and user-experience metrics. Covers anti-patterns for loading, rendering, JavaScript, CSS, images, and bundles, plus framework-specific guidance for Next.js, Angular, React, and Vue."
 ---
 
 # Performance Standards
@@ -891,7 +891,7 @@ Vue 3.6+ Vapor Mode compiles templates to direct DOM operations, bypassing the v
 ## Resource Hints Quick Reference
 
 | Hint | Purpose | When to Use |
-| ------ | --------- | ------------- |
+| ------ | --------- | ----------- |
 | `preconnect` | DNS + TCP + TLS early | Critical third-party origins (API, CDN, fonts) |
 | `preload` | Fetch immediately, high priority | LCP image, critical font |
 | `prefetch` | Low priority for future navigation | Next-page assets |

@@ -1,3 +1,8 @@
+---
+name: add-educational-comments
+description: Add educational comments to code files so they become effective learning resources. Use when adding learning-focused inline documentation to source files, explaining language concepts, or transforming code into teaching material. Handles configuration for detail level, repetitiveness, knowledge level, and line-number referencing.
+---
+
 # Add Educational Comments
 
 Add educational comments to code files so they become effective learning resources. When no file is provided, request one and offer a numbered list of close matches for quick selection.

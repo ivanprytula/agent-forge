@@ -1,8 +1,13 @@
+---
+applyTo: 'services/**/*.sql, infra/database/**/*.sql, alembic/**/*.py'
+description: "PostgreSQL code review standards covering JSONB best practices, array operations, schema design, custom types and domains, performance anti-patterns, extension usage, row level security, and privilege management. Use when reviewing SQL queries, migrations, schema definitions, or database code for PostgreSQL-specific quality."
+---
+
 # PostgreSQL Code Review Assistant
 
-Expert PostgreSQL code review for ${selection} (or entire project if no selection). Focus on PostgreSQL-specific best practices, anti-patterns, and quality standards that are unique to PostgreSQL.
+Expert PostgreSQL code review. Focus on PostgreSQL-specific best practices, anti-patterns, and quality standards that are unique to PostgreSQL.
 
-## 🎯 PostgreSQL-Specific Review Areas
+## PostgreSQL-Specific Review Areas
 
 ### JSONB Best Practices
 
@@ -85,7 +90,7 @@ CREATE TABLE transactions (
 );
 ```
 
-## 🔍 PostgreSQL-Specific Anti-Patterns
+## PostgreSQL-Specific Anti-Patterns
 
 ### Performance Anti-Patterns
 
@@ -130,9 +135,7 @@ CREATE TRIGGER update_modified_time_trigger
     EXECUTE FUNCTION update_modified_time();
 ```
 
-## 📊 PostgreSQL Extension Usage Review
-
-### Extension Best Practices
+## PostgreSQL Extension Usage Review
 
 ```sql
 -- ✅ Check if extension exists before creating
@@ -151,7 +154,7 @@ SELECT crypt('password', gen_salt('bf'));
 SELECT word_similarity('postgres', 'postgre');
 ```
 
-## 🛡️ PostgreSQL Security Review
+## PostgreSQL Security Review
 
 ### Row Level Security (RLS)
 
@@ -175,7 +178,7 @@ GRANT SELECT, INSERT, UPDATE ON specific_table TO app_user;
 GRANT USAGE ON SEQUENCE specific_table_id_seq TO app_user;
 ```
 
-## 🎯 PostgreSQL Code Quality Checklist
+## PostgreSQL Code Quality Checklist
 
 ### Schema Design
 
@@ -208,7 +211,7 @@ GRANT USAGE ON SEQUENCE specific_table_id_seq TO app_user;
 - [ ] Using PostgreSQL's built-in encryption functions
 - [ ] Implementing audit trails with PostgreSQL features
 
-## 📝 PostgreSQL-Specific Review Guidelines
+## PostgreSQL-Specific Review Guidelines
 
 1. **Data Type Optimization**: Ensure PostgreSQL-specific types are used appropriately
 2. **Index Strategy**: Review index types and ensure PostgreSQL-specific indexes are utilized

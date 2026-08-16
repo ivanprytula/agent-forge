@@ -1,3 +1,8 @@
+---
+applyTo: '*'
+description: "Design, refactor, or debug AI agent control flow including ReAct, Plan-Execute, Reflexion, graph/state-machine, and agentic RAG loops. Use when building LangGraph graphs, CrewAI crews, AutoGen teams, Pydantic-AI agents, or any system where an LLM decides which tool to call, whether to branch, and when to stop."
+---
+
 # Agent Loop Design
 
 ## When to Activate

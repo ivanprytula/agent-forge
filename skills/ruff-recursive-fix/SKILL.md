@@ -1,3 +1,8 @@
+---
+name: ruff-recursive-fix
+description: Enforce code quality with Ruff in a controlled, iterative workflow supporting safe and unsafe autofixes, diff review, recursive repetition, and judicious noqa suppression. Use when running ruff check/format across a project, fixing lint findings, or establishing a repeatable Ruff remediation process.
+---
+
 # Ruff Recursive Fix
 
 ## Overview

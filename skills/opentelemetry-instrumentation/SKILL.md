@@ -1,3 +1,8 @@
+---
+name: opentelemetry-instrumentation
+description: Wire OpenTelemetry distributed tracing into FastAPI services with graceful degradation. Use when adding or modifying OTel tracing in libs/platform/tracing.py, FastAPI app lifespans, SQLAlchemy instrumentation, or trace correlation with structured logging.
+---
+
 # opentelemetry-instrumentation
 
 Wire OpenTelemetry distributed tracing into FastAPI services with graceful degradation.

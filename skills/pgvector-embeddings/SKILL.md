@@ -1,3 +1,8 @@
+---
+name: pgvector-embeddings
+description: Use pgvector with SQLAlchemy 2.0 async for semantic search, embedding storage, similarity search, and vector indexes in FastAPI services. Use when implementing or modifying embedding storage, upsert patterns, cosine/HNSW search, or Alembic migrations for pgvector-backed services.
+---
+
 # pgvector-embeddings
 
 Use pgvector with SQLAlchemy 2.0 async for semantic search in FastAPI services.

@@ -1,3 +1,8 @@
+---
+name: repo-standards
+description: Repository standards for response style, working preferences, privacy, and file access across AI coding agents. Use when reviewing or modifying repo-level behavior rules, deciding on patch scope, or determining which files are out of scope for agent reads.
+---
+
 # Repo Standards
 
 ## Read Scope

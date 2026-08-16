@@ -1,3 +1,8 @@
+---
+name: terraform-plan-review
+description: Catch destructive or risky changes in a terraform plan before they reach apply. Use after running terraform plan in terraform/environments/aws-dev to summarize adds, in-place changes, destroys, and replacements with an explicit go/no-go recommendation.
+---
+
 # Terraform Plan Review — Skill
 
 Purpose: catch destructive or risky changes in a `terraform plan` before they reach `apply`, and make sure

@@ -1,10 +1,6 @@
 ---
-name: async-patterns
-description:
-    'Production-grade async/await patterns and anti-patterns for Python. Covers concurrency models,
-    coroutines, event loops, Task vs Future, backpressure, cancellation semantics, timeouts, and
-    choosing between async, threads, and processes for FastAPI services.'
 applyTo: 'src/**/*.py, **/*.py'
+description: "Async/await patterns. Production-grade concurrency for Python covering blocking vs non-blocking I/O, coroutines, event loops, Task vs Future, structured concurrency with TaskGroup, cancellation, timeouts, backpressure, completion models, race conditions, choosing between async/threads/processes, and FastAPI production patterns."
 ---
 
 # Async/Await Patterns: Production-Grade Concurrency
@@ -13,12 +9,9 @@ applyTo: 'src/**/*.py, **/*.py'
 
 ### The Central Idea
 
-Async is **not** a performance spell. It is a **concurrency model** for managing I/O-bound workloads
-efficiently.
+Async is **not** a performance spell. It is a **concurrency model** for managing I/O-bound workloads efficiently.
 
-**Key insight:** I/O is slow. When your service makes an HTTP request, waits on a database, reads
-from a socket, or talks to Redis, the CPU is usually waiting, not computing. Async allows other work
-to proceed during that wait instead of blocking the entire execution context.
+**Key insight:** I/O is slow. When your service makes an HTTP request, waits on a database, reads from a socket, or talks to Redis, the CPU is usually waiting, not computing. Async allows other work to proceed during that wait instead of blocking the entire execution context.
 
 ```text
 Blocking I/O:  [Wait for data] → (thread stuck, nothing else happens)
@@ -78,11 +71,9 @@ asyncio.wait()  # High-level wrapper around select/poll/epoll/kqueue
 
 **Important truth:** Only one thread can execute Python bytecode at a time in CPython.
 
-**Consequence 1:** Threads are still useful for I/O-bound work because blocking I/O often releases
-the GIL, allowing another thread to run.
+**Consequence 1:** Threads are still useful for I/O-bound work because blocking I/O often releases the GIL, allowing another thread to run.
 
-**Consequence 2:** Threads don't provide real speedup for CPU-bound pure Python code (both threads
-contend for the GIL).
+**Consequence 2:** Threads don't provide real speedup for CPU-bound pure Python code (both threads contend for the GIL).
 
 **Consequence 3:** Async does NOT bypass the GIL. It solves a different problem entirely.
 
@@ -98,8 +89,7 @@ async def heavy_compute():
 
 **Strong mental model:**
 
-> Async is a lower-overhead way to manage many mostly-waiting operations when they can yield control
-> cooperatively. It does not bypass the GIL and does not provide CPU parallelism.
+> Async is a lower-overhead way to manage many mostly-waiting operations when they can yield control cooperatively. It does not bypass the GIL and does not provide CPU parallelism.
 
 ---
 
@@ -107,8 +97,7 @@ async def heavy_compute():
 
 ### Coroutines are Stateful Execution Objects
 
-When you call an `async def`, Python doesn't immediately run the function. It creates a coroutine
-object:
+When you call an `async def`, Python doesn't immediately run the function. It creates a coroutine object:
 
 ```python
 async def foo():
@@ -225,24 +214,25 @@ await asyncio.sleep(1)
 
 **The crucial distinction:**
 
-> `asyncio.sleep()` is not blocking sleep. It's a cooperative handoff to the event loop until a
-> timer says the task may continue.
+> `asyncio.sleep()` is not blocking sleep. It's a timer-based suspension that lets the event loop run other tasks while waiting.
 
 ---
 
-## Task vs Future: Shape and Role
+## Task vs Future: The Practical Distinction
 
-### Future: A Placeholder
+### Future → Container for a Result
 
-A `Future` is a low-level object representing a result that will exist later:
+A `Future` is a placeholder for a result that will be available later. It doesn't execute code on its own.
 
 ```python
-future = asyncio.Future()
-# Holds a value, exception, or cancellation
-# Does not actively run anything
+from asyncio import Future
+
+future = Future()
+# future.set_result(42)  # Someone sets the result later
+# result = await future  # Waits until result is available
 ```
 
-### Task: A Future That Runs Your Code
+### Task → A Future That Runs Your Code
 
 A `Task` wraps a coroutine and actively drives its execution in the event loop:
 
@@ -261,6 +251,11 @@ task = asyncio.create_task(worker())
 Future → container for a result (lazy, doesn't execute)
 Task   → schedulable executor of a coroutine (active, drives execution)
 ```
+
+**When to use which:**
+
+- Use `Task` for coroutines you want to run concurrently.
+- Use `Future` when you need a manual result container (rare in application code).
 
 ---
 
@@ -289,8 +284,7 @@ async def good():
 
 **The most important truth:**
 
-> Async code is only as non-blocking as the code you put inside it. If you put blocking I/O or
-> CPU-heavy logic into the event loop, the service becomes unresponsive.
+> Async code is only as non-blocking as the code you put inside it. If you put blocking I/O or CPU-heavy logic into the event loop, the service becomes unresponsive.
 
 ---
 
@@ -444,11 +438,17 @@ await asyncio.gather(*tasks)
 ### Better Pattern: Queue + Workers
 
 ```python
-async def worker(queue: asyncio.Queue):
+async def worker(queue: asyncio.Queue, worker_id: int):
     while True:
-        item = await queue.get()
         try:
-            await process(item)
+            task = await queue.get()
+            async with asyncio.timeout(30):
+                result = await process_task(task)
+                logger.info(f"Worker {worker_id}: {result}")
+        except asyncio.TimeoutError:
+            logger.error(f"Worker {worker_id}: timeout")
+        except Exception as e:
+            logger.error(f"Worker {worker_id}: error {e}")
         finally:
             queue.task_done()
 
@@ -456,7 +456,10 @@ async def main(items):
     queue = asyncio.Queue(maxsize=1000)  # Backpressure built-in
 
     # Start 100 workers
-    workers = [asyncio.create_task(worker(queue)) for _ in range(100)]
+    workers = [
+        asyncio.create_task(worker(queue, i))
+        for i in range(100)
+    ]
 
     # Add work
     for item in items:
@@ -675,7 +678,7 @@ async def fake_async():
 # ✓ Use proper async HTTP
 async def real_async():
     async with aiohttp.ClientSession() as session:
-        await session.get(url)
+        response = await session.get(url)
 ```
 
 ### Anti-pattern: CPU-Heavy Work in Event Loop
@@ -791,8 +794,7 @@ async def main():
 
 ### "Async makes everything faster"
 
-**False.** Async doesn't speed up single operations. It improves utilization when there are many
-operations that spend time waiting.
+**False.** Async doesn't speed up single operations. It improves utilization when there are many operations that spend time waiting.
 
 ```python
 # Single query: async might be slower (overhead)
@@ -822,8 +824,7 @@ while not stopped:
 
 ### "Async bypasses the GIL"
 
-**False.** Async doesn't help with CPU-bound work. The GIL still prevents parallel bytecode
-execution in threads. Use processes for CPU parallelism.
+**False.** Async doesn't help with CPU-bound work. The GIL still prevents parallel bytecode execution in threads. Use processes for CPU parallelism.
 
 ---
 
@@ -852,30 +853,20 @@ execution in threads. Use processes for CPU parallelism.
 
 ### "What is async in Python?"
 
-> In Python, async is a model of cooperative multitasking where many mostly I/O-bound operations
-> share a single execution thread through an event loop. Coroutines explicitly yield control at
-> `await` points, and the loop uses that time to advance other ready tasks or resume those waiting
-> on I/O readiness or timers. It is not CPU parallelism and does not bypass the GIL; it's a way to
-> manage large amounts of waiting work efficiently.
+> In Python, async is a model of cooperative multitasking where many mostly I/O-bound operations share a single execution thread through an event loop. Coroutines explicitly yield control at `await` points, and the loop uses that time to advance other ready tasks or resume those waiting on I/O readiness or timers. It is not CPU parallelism and does not bypass the GIL; it's a way to manage large amounts of waiting work efficiently.
 
 ### "When would you choose async, threads, or processes?"
 
-> I choose `asyncio` when the workload is I/O-bound with many concurrent waits: HTTP, databases,
-> queues, sockets. I use threads when work is blocking but synchronous, or to offload small blocking
-> sections without freezing the loop. I use processes when the workload is CPU-bound and I need real
-> parallelism. The choice follows the workload shape: waiting, blocking, or compute.
+> I choose `asyncio` when the workload is I/O-bound with many concurrent waits: HTTP, databases, queues, sockets. I use threads when work is blocking but synchronous, or to offload small blocking sections without freezing the loop. I use processes when the workload is CPU-bound and I need real parallelism. The choice follows the workload shape: waiting, blocking, or compute.
 
 ### "Why doesn't async make code parallel?"
 
-> Because `await` only yields control cooperatively. It allows interleaving within a single thread,
-> not parallel execution of Python bytecode. Only processes can bypass the GIL for true parallelism.
+> Because `await` only yields control cooperatively. It allows interleaving within a single thread, not parallel execution of Python bytecode. Only processes can bypass the GIL for true parallelism.
 
 ---
 
 ## See Also
 
 - Lambda & Functional Programming: Anonymous functions and functional tools
-- [Error Handling & Logging](python.instructions.md#error-handling--logging): Structured logging in
-  async code
-- [Testing (pytest + pytest-asyncio)](python.instructions.md#testing-pytest--pytest-asyncio):
-  Testing async code
+- [Error Handling & Logging](../instructions/python.instructions.md#error-handling--logging): Structured logging in async code
+- [Testing (pytest + pytest-asyncio)](../instructions/python.instructions.md#testing-pytest--pytest-asyncio): Testing async code

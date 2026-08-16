@@ -1,3 +1,8 @@
+---
+name: architecture-blueprint-generator
+description: Generate a comprehensive Project Architecture Blueprint document from an existing codebase. Use when the user asks for architecture documentation, system overviews, component maps, or a definitive reference for maintaining architectural consistency across a project.
+---
+
 # Comprehensive Project Architecture Blueprint Generator
 
 ## Configuration Variables

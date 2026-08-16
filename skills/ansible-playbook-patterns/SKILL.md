@@ -1,3 +1,8 @@
+---
+name: ansible-playbook-patterns
+description: Ansible playbook patterns for idempotent, lintable, and consistent infrastructure automation. Use when writing or reviewing playbooks under ansible/playbooks/, inventory under ansible/inventory/, or any Ansible task that needs idempotency, tagging strategy, or ansible-lint compliance.
+---
+
 # Ansible Playbook Patterns — Skill
 
 Purpose: keep the AWS MVP bootstrap idempotent, lintable, and consistent with the SSM inventory.

@@ -1,3 +1,8 @@
+---
+name: fastmcp-server-patterns
+description: Build application-layer FastMCP servers that expose internal tool surfaces to LLM clients. Use when creating or modifying services/mcp/ tools, FastMCP tool definitions, argument patterns, or the ingestor HTTP client layer in this project.
+---
+
 # fastmcp-server-patterns
 
 Build application-layer FastMCP servers that expose internal tool surfaces to LLM clients.

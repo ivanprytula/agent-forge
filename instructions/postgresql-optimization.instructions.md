@@ -1,8 +1,11 @@
+---
+applyTo: 'services/**/*.py, infra/database/**/*.sql'
+description: "PostgreSQL performance tuning, query optimization, index strategies, and advanced SQL patterns for PostgreSQL 17+ with async SQLAlchemy 2.0. Use when optimizing slow queries, designing indexes, tuning connection pools, implementing cursor-based pagination, or setting up query performance monitoring."
+---
+
 # PostgreSQL Optimization
 
-Use for PostgreSQL performance tuning, query optimization, index strategies, and advanced
-SQL patterns. Covers PostgreSQL 17+ features, async SQLAlchemy 2.0 patterns, and production
-monitoring.
+Use for PostgreSQL performance tuning, query optimization, index strategies, and advanced SQL patterns. Covers PostgreSQL 17+ features, async SQLAlchemy 2.0 patterns, and production monitoring.
 
 ## When to Activate
 

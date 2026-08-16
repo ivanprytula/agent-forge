@@ -1,3 +1,8 @@
+---
+name: pytest-coverage
+description: Generate pytest coverage reports, identify uncovered lines via annotate output, and iteratively add tests until coverage targets are met. Use when improving test coverage, reviewing cov_annotate output, or ensuring critical paths are fully exercised by tests.
+---
+
 # Pytest Coverage
 
 Generate a coverage report with:

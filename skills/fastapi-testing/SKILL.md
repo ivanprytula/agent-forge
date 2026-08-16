@@ -1,3 +1,7 @@
+---
+name: fastapi-testing
+description: FastAPI testing conventions using AsyncClient + ASGITransport, dependency overrides, async test signatures, module-level test data constants, response assertion patterns, pagination envelopes, and the three-test rule per endpoint. Use when writing or reviewing API tests for FastAPI services.
+---
 
 # FastAPI Testing Conventions
 

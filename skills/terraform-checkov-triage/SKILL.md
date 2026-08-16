@@ -1,3 +1,8 @@
+---
+name: terraform-checkov-triage
+description: Decide what to do with a Checkov finding without silently suppressing it or blocking on every low-value warning. Use when a checkov scan reports a new finding, TERRAFORM_CHECKS.md needs a status check, or a deferral decision is required for infrastructure security findings.
+---
+
 # Terraform Checkov Triage — Skill
 
 Purpose: decide what to do with a Checkov finding without either silently suppressing it or blocking on
