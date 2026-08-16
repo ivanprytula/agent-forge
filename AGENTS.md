@@ -15,15 +15,15 @@
 ├── AGENTS.md                 # This file — repo memory for agents
 ├── skills/                   # Agent skill definitions (SKILL.md with frontmatter)
 │   ├── manifest.json         # Skill catalog for runtime discovery
-│   ├── index.md              # Human-readable skill index with triggers
-│   └── self-improving-agent/ # Meta-skill: capture learnings, promote to AGENTS.md, extract skills
+│   └── index.md              # Human-readable skill index with triggers
 ├── instructions/             # Shared progressive-loading instruction files
+│   └── self-improving-agent.instructions.md  # Meta-skill: capture learnings, promote to AGENTS.md, extract skills
 ├── hooks/                    # Normalized hook definitions + scripts
 ├── prompts/                  # Reusable prompt templates
 ├── conventions/              # Shared conventions (commits, bash, etc.)
 ├── agent-configs/            # Generic agent config templates
 ├── adapters/                 # Agent-specific scripts to wire this repo into a project
-├── .learnings/               # Self-improvement logs (gitignored; see skills/self-improving-agent)
+├── .learnings/               # Self-improvement logs (gitignored; see instructions/self-improving-agent.instructions.md)
 │   ├── LEARNINGS.md
 │   ├── ERRORS.md
 │   └── FEATURE_REQUESTS.md
@@ -115,7 +115,7 @@ This repo includes reusable skills in the `skills/` directory. Skills are agent 
 
 | Skill                                                        | Purpose                                                     | Trigger                                                     |
 | ------------------------------------------------------------ | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| [self-improving-agent](skills/self-improving-agent/SKILL.md) | Improve this AGENTS.md, create new skills, encode learnings | After completing a task, or when noticing repeated friction |
+| _(none currently — see `instructions/` for moved skills)_   | —                                                           | —                                                           |
 
 For the full catalog, see `skills/index.md` or parse `skills/manifest.json`.
 
@@ -127,7 +127,7 @@ For the full catalog, see `skills/index.md` or parse `skills/manifest.json`.
 
 ### Creating New Skills
 
-When a workflow repeats — especially across projects — promote it to a skill. Use the `self-improving-agent` skill for guidance on when and how.
+When a workflow repeats — especially across projects — promote it to a skill. See `instructions/self-improving-agent.instructions.md` for guidance on when and how.
 
 ### Skill Discovery
 
@@ -172,7 +172,7 @@ Only load the instruction file when the files you are touching match its `applyT
 
 2. **User correction?** If a human corrects your behavior (e.g., "don't use that API", "run tests this way"), add the correction to the appropriate section of this file (Local Norms, Guardrails, or Patterns & Gotchas) **before continuing any other work**. Do not defer this to the end of the task. Future sessions depend on it.
 
-3. **Repeated friction?** If you notice yourself doing the same multi-step workflow more than once, consider creating a new skill in `skills/`. Use the [self-improving-agent skill](skills/self-improving-agent/SKILL.md) for the procedure.
+3. **Repeated friction?** If you notice yourself doing the same multi-step workflow more than once, consider creating a new skill in `skills/`. See `instructions/self-improving-agent.instructions.md` for the procedure.
 
 4. **Post-task reflection.** After completing a significant task, briefly review:
    - Did anything surprise you?

@@ -1,10 +1,5 @@
 [
   {
-    "name": "add-educational-comments",
-    "description": "Add learning-focused inline documentation to source files.",
-    "path": "skills/add-educational-comments/SKILL.md"
-  },
-  {
     "name": "alembic-migration-patterns",
     "description": "Manage schema migrations with isolated Alembic histories and additive changes.",
     "path": "skills/alembic-migration-patterns/SKILL.md"
@@ -13,21 +8,6 @@
     "name": "ansible-playbook-patterns",
     "description": "Write idempotent, lintable Ansible playbooks and inventory.",
     "path": "skills/ansible-playbook-patterns/SKILL.md"
-  },
-  {
-    "name": "architecture-blueprint-generator",
-    "description": "Generate a Project Architecture Blueprint from an existing codebase.",
-    "path": "skills/architecture-blueprint-generator/SKILL.md"
-  },
-  {
-    "name": "autoresearch",
-    "description": "Autonomous iterative experimentation loop for measurable metric-driven improvement.",
-    "path": "skills/autoresearch/SKILL.md"
-  },
-  {
-    "name": "create-architectural-decision-record",
-    "description": "Create a structured Architectural Decision Record (ADR).",
-    "path": "skills/create-architectural-decision-record/SKILL.md"
   },
   {
     "name": "fastapi-testing",
@@ -40,11 +20,6 @@
     "path": "skills/fastmcp-server-patterns/SKILL.md"
   },
   {
-    "name": "kilo-context-compaction",
-    "description": "Compact the Kilo context window at 60% usage to prevent overflow.",
-    "path": "skills/kilo-context-compaction/SKILL.md"
-  },
-  {
     "name": "opentelemetry-instrumentation",
     "description": "Wire OpenTelemetry distributed tracing into FastAPI services.",
     "path": "skills/opentelemetry-instrumentation/SKILL.md"
@@ -55,24 +30,9 @@
     "path": "skills/pgvector-embeddings/SKILL.md"
   },
   {
-    "name": "pytest-coverage",
-    "description": "Generate pytest coverage reports and iteratively add tests to meet targets.",
-    "path": "skills/pytest-coverage/SKILL.md"
-  },
-  {
-    "name": "repo-standards",
-    "description": "Repository standards for response style, working preferences, and file access.",
-    "path": "skills/repo-standards/SKILL.md"
-  },
-  {
     "name": "ruff-recursive-fix",
     "description": "Enforce code quality with Ruff in a controlled iterative workflow.",
     "path": "skills/ruff-recursive-fix/SKILL.md"
-  },
-  {
-    "name": "self-improving-agent",
-    "description": "Capture learnings, errors, and corrections for continuous improvement.",
-    "path": "skills/self-improving-agent/SKILL.md"
   },
   {
     "name": "streamlit-dashboard",

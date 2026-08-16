@@ -1,20 +1,19 @@
 ---
-name: architecture-blueprint-generator
-description: Generate a comprehensive Project Architecture Blueprint document from an existing codebase. Use when the user asks for architecture documentation, system overviews, component maps, or a definitive reference for maintaining architectural consistency across a project.
+description: "Generate a comprehensive Project Architecture Blueprint document from an existing codebase. Use when the user asks for architecture documentation, system overviews, component maps, or a definitive reference for maintaining architectural consistency across a project."
 ---
 
 # Comprehensive Project Architecture Blueprint Generator
 
 ## Configuration Variables
 
-${PROJECT_TYPE="Auto-detect|.NET|Java|React|Angular|Python|Node.js|Flutter|Other"} <!-- Primary technology -->
-${ARCHITECTURE_PATTERN="Auto-detect|Clean Architecture|Microservices|Layered|MVVM|MVC|Hexagonal|Event-Driven|Serverless|Monolithic|Other"} <!-- Primary architectural pattern -->
-${DIAGRAM_TYPE="C4|UML|Flow|Component|None"} <!-- Architecture diagram type -->
-${DETAIL_LEVEL="High-level|Detailed|Comprehensive|Implementation-Ready"} <!-- Level of detail to include -->
-${INCLUDES_CODE_EXAMPLES=true|false} <!-- Include sample code to illustrate patterns -->
-${INCLUDES_IMPLEMENTATION_PATTERNS=true|false} <!-- Include detailed implementation patterns -->
-${INCLUDES_DECISION_RECORDS=true|false} <!-- Include architectural decision records -->
-${FOCUS_ON_EXTENSIBILITY=true|false} <!-- Emphasize extension points and patterns -->
+`PROJECT_TYPE` — Primary technology (Auto-detect, .NET, Java, React, Angular, Python, Node.js, Flutter, Other)
+`ARCHITECTURE_PATTERN` — Primary architectural pattern (Auto-detect, Clean Architecture, Microservices, Layered, MVVM, MVC, Hexagonal, Event-Driven, Serverless, Monolithic, Other)
+`DIAGRAM_TYPE` — Architecture diagram type (C4, UML, Flow, Component, None)
+`DETAIL_LEVEL` — Level of detail (High-level, Detailed, Comprehensive, Implementation-Ready)
+`INCLUDES_CODE_EXAMPLES` — Include sample code (true, false)
+`INCLUDES_IMPLEMENTATION_PATTERNS` — Include detailed implementation patterns (true, false)
+`INCLUDES_DECISION_RECORDS` — Include architectural decision records (true, false)
+`FOCUS_ON_EXTENSIBILITY` — Emphasize extension points and patterns (true, false)
 
 ## Generated Prompt
 
@@ -22,17 +21,17 @@ ${FOCUS_ON_EXTENSIBILITY=true|false} <!-- Emphasize extension points and pattern
 
 ### 1. Architecture Detection and Analysis
 
-- ${PROJECT_TYPE == "Auto-detect" ? "Analyze the project structure to identify all technology stacks and frameworks in use by examining:
+- Analyze the project structure to identify all technology stacks and frameworks in use by examining:
   - Project and configuration files
   - Package dependencies and import statements
   - Framework-specific patterns and conventions
-  - Build and deployment configurations" : "Focus on ${PROJECT_TYPE} specific patterns and practices"}
+  - Build and deployment configurations
 
-- ${ARCHITECTURE_PATTERN == "Auto-detect" ? "Determine the architectural pattern(s) by analyzing:
+- Determine the architectural pattern(s) by analyzing:
   - Folder organization and namespacing
   - Dependency flow and component boundaries
   - Interface segregation and abstraction patterns
-  - Communication mechanisms between components" : "Document how the ${ARCHITECTURE_PATTERN} architecture is implemented"}
+  - Communication mechanisms between components
 
 ### 2. Architectural Overview
 
@@ -43,14 +42,11 @@ ${FOCUS_ON_EXTENSIBILITY=true|false} <!-- Emphasize extension points and pattern
 
 ### 3. Architecture Visualization
 
-${DIAGRAM_TYPE != "None" ? `Create ${DIAGRAM_TYPE} diagrams at multiple levels of abstraction:
+Create diagrams at multiple levels of abstraction:
 - High-level architectural overview showing major subsystems
 - Component interaction diagrams showing relationships and dependencies
 - Data flow diagrams showing how information moves through the system
-- Ensure diagrams accurately reflect the actual implementation, not theoretical patterns` : "Describe the component relationships based on actual code dependencies, providing clear textual explanations of:
-- Subsystem organization and boundaries
-- Dependency directions and component interactions
-- Data flow and process sequences"}
+- Ensure diagrams accurately reflect the actual implementation, not theoretical patterns
 
 ### 4. Core Architectural Components
 
@@ -139,56 +135,11 @@ Document implementation patterns for cross-cutting concerns:
 
 ### 9. Technology-Specific Architectural Patterns
 
-${PROJECT_TYPE == "Auto-detect" ? "For each detected technology stack, document specific architectural patterns:" : `Document ${PROJECT_TYPE}-specific architectural patterns:`}
-
-${(PROJECT_TYPE == ".NET" || PROJECT_TYPE == "Auto-detect") ?
-"#### .NET Architectural Patterns (if detected)
-- Host and application model implementation
-- Middleware pipeline organization
-- Framework service integration patterns
-- ORM and data access approaches
-- API implementation patterns (controllers, minimal APIs, etc.)
-- Dependency injection container configuration" : ""}
-
-${(PROJECT_TYPE == "Java" || PROJECT_TYPE == "Auto-detect") ?
-"#### Java Architectural Patterns (if detected)
-- Application container and bootstrap process
-- Dependency injection framework usage (Spring, CDI, etc.)
-- AOP implementation patterns
-- Transaction boundary management
-- ORM configuration and usage patterns
-- Service implementation patterns" : ""}
-
-${(PROJECT_TYPE == "React" || PROJECT_TYPE == "Auto-detect") ?
-"#### React Architectural Patterns (if detected)
-- Component composition and reuse strategies
-- State management architecture
-- Side effect handling patterns
-- Routing and navigation approach
-- Data fetching and caching patterns
-- Rendering optimization strategies" : ""}
-
-${(PROJECT_TYPE == "Angular" || PROJECT_TYPE == "Auto-detect") ?
-"#### Angular Architectural Patterns (if detected)
-- Module organization strategy
-- Component hierarchy design
-- Service and dependency injection patterns
-- State management approach
-- Reactive programming patterns
-- Route guard implementation" : ""}
-
-${(PROJECT_TYPE == "Python" || PROJECT_TYPE == "Auto-detect") ?
-"#### Python Architectural Patterns (if detected)
-- Module organization approach
-- Dependency management strategy
-- OOP vs. functional implementation patterns
-- Framework integration patterns
-- Asynchronous programming approach" : ""}
+For each detected technology stack, document specific architectural patterns.
 
 ### 10. Implementation Patterns
 
-${INCLUDES_IMPLEMENTATION_PATTERNS ?
-"Document concrete implementation patterns for key architectural components:
+Document concrete implementation patterns for key architectural components:
 
 - **Interface Design Patterns**:
   - Interface segregation approaches
@@ -218,7 +169,7 @@ ${INCLUDES_IMPLEMENTATION_PATTERNS ?
   - Entity implementation patterns
   - Value object patterns
   - Domain event implementation
-  - Business rule enforcement" : "Mention that detailed implementation patterns vary across the codebase."}
+  - Business rule enforcement
 
 ### 11. Testing Architecture
 
@@ -239,8 +190,7 @@ ${INCLUDES_IMPLEMENTATION_PATTERNS ?
 
 ### 13. Extension and Evolution Patterns
 
-${FOCUS_ON_EXTENSIBILITY ?
-"Provide detailed guidance for extending the architecture:
+Provide detailed guidance for extending the architecture:
 
 - **Feature Addition Patterns**:
   - How to add new features while preserving architectural integrity
@@ -258,10 +208,10 @@ ${FOCUS_ON_EXTENSIBILITY ?
   - How to integrate new external systems
   - Adapter implementation patterns
   - Anti-corruption layer patterns
-  - Service facade implementation" : "Document key extension points in the architecture."}
+  - Service facade implementation
 
-${INCLUDES_CODE_EXAMPLES ?
-"### 14. Architectural Pattern Examples
+### 14. Architectural Pattern Examples
+
 Extract representative code examples that illustrate key architectural patterns:
 
 - **Layer Separation Examples**:
@@ -279,10 +229,10 @@ Extract representative code examples that illustrate key architectural patterns:
   - Extension interface implementations
   - Configuration-driven extension patterns
 
-Include enough context with each example to show the pattern clearly, but keep examples concise and focused on architectural concepts." : ""}
+Include enough context with each example to show the pattern clearly, but keep examples concise and focused on architectural concepts.
 
-${INCLUDES_DECISION_RECORDS ?
-"### 15. Architectural Decision Records
+### 15. Architectural Decision Records
+
 Document key architectural decisions evident in the codebase:
 
 - **Architectural Style Decisions**:
@@ -304,16 +254,16 @@ For each decision, note:
 - Context that made the decision necessary
 - Factors considered in making the decision
 - Resulting consequences (positive and negative)
-- Future flexibility or limitations introduced" : ""}
+- Future flexibility or limitations introduced
 
-### ${INCLUDES_DECISION_RECORDS ? "16" : INCLUDES_CODE_EXAMPLES ? "15" : "14"}. Architecture Governance
+### 16. Architecture Governance
 
 - Document how architectural consistency is maintained
 - Identify automated checks for architectural compliance
 - Note architectural review processes evident in the codebase
 - Document architectural documentation practices
 
-### ${INCLUDES_DECISION_RECORDS ? "17" : INCLUDES_CODE_EXAMPLES ? "16" : "15"}. Blueprint for New Development
+### 17. Blueprint for New Development
 
 Create a clear architectural guide for implementing new features:
 

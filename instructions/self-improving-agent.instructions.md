@@ -1,28 +1,8 @@
 ---
-name: self-improving-agent
 description: "Captures learnings, errors, corrections, and feature requests to enable continuous improvement. Use when: (1) User corrects Claude ('No, that's wrong...', 'Actually...'), (2) User requests a capability that doesn't exist, (3) Claude realizes its knowledge is outdated or incorrect, (4) A better approach is discovered for a recurring task, (5) Receiving a Handoff block from self-healing (a recurring verified heal at Recurrence-Count >= 3) to distill into a memory file or new skill. For ACTIVE runtime failures where the agent needs to apply and verify a fix mid-task, use `self-healing` instead (it files HEAL- entries with proof; self-improving-agent promotes accumulated patterns). Also review learnings before major tasks. For CI-only/headless learning capture, use self-improving-agent-ci."
 ---
 
 # Self-Improvement Skill
-
-## Install
-
-```bash
-gh skill install pskoett/pskoett-skills self-improvement
-```
-
-For CI-only execution, use:
-
-```bash
-gh skill install pskoett/pskoett-skills self-improvement-ci
-```
-
-Fallback using the Agent Skills CLI:
-
-```bash
-npx skills add pskoett/pskoett-skills/skills/self-improvement
-npx skills add pskoett/pskoett-skills/skills/self-improvement-ci
-```
 
 Log learnings and errors to markdown files for continuous improvement. Coding agents can later process these into fixes, and important learnings get promoted to project memory.
 
@@ -43,7 +23,6 @@ Log learnings and errors to markdown files for continuous improvement. Coding ag
 | Simplify/Harden recurring patterns | Log/update `.learnings/LEARNINGS.md` with `Source: simplify-and-harden` and a stable `Pattern-Key` |
 | Similar to existing entry | Link with `**See Also**`, consider priority bump |
 | Broadly applicable learning | Promote to `CLAUDE.md`, `AGENTS.md`, and/or `.github/copilot-instructions.md` |
-| OpenClaw workspace targets (SOUL.md, TOOLS.md) | See `references/openclaw-integration.md` |
 
 ## Setup
 
@@ -206,8 +185,6 @@ When a learning is broadly applicable (not a one-off fix), promote it to permane
 | `AGENTS.md` | Agent-specific workflows, tool usage patterns, automation rules |
 | `.github/copilot-instructions.md` | Project context and conventions for GitHub Copilot |
 
-OpenClaw workspace targets (`SOUL.md`, `TOOLS.md`) are covered in `references/openclaw-integration.md`.
-
 ### How to Promote
 
 1. **Distill** the learning into a concise rule or fact
@@ -215,29 +192,6 @@ OpenClaw workspace targets (`SOUL.md`, `TOOLS.md`) are covered in `references/op
 3. **Update** original entry:
    - Change `**Status**: pending` → `**Status**: promoted`
    - Add `**Promoted**: CLAUDE.md`, `AGENTS.md`, or `.github/copilot-instructions.md`
-
-### Promotion Examples
-
-**Learning** (verbose):
-> Project uses pnpm workspaces. Attempted `npm install` but failed.
-> Lock file is `pnpm-lock.yaml`. Must use `pnpm install`.
-
-**In CLAUDE.md** (concise):
-```markdown
-## Build & Dependencies
-- Package manager: pnpm (not npm) - use `pnpm install`
-```
-
-**Learning** (verbose):
-> When modifying API endpoints, must regenerate TypeScript client.
-> Forgetting this causes type mismatches at runtime.
-
-**In AGENTS.md** (actionable):
-```markdown
-## After API Changes
-1. Regenerate client: `pnpm run generate:api`
-2. Check for type errors: `pnpm tsc --noEmit`
-```
 
 ## Recurring Pattern Detection
 
@@ -253,8 +207,7 @@ If logging something similar to an existing entry:
 
 ## Simplify & Harden Feed
 
-Use this workflow to ingest recurring patterns from the `simplify-and-harden`
-skill and turn them into durable prompt guidance.
+Use this workflow to ingest recurring patterns from the `simplify-and-harden` skill and turn them into durable prompt guidance.
 
 ### Ingestion Workflow
 
@@ -283,12 +236,10 @@ Promotion targets:
 - `CLAUDE.md`
 - `AGENTS.md`
 - `.github/copilot-instructions.md`
-- OpenClaw workspace files when applicable — see `references/openclaw-integration.md`
 
 This three-condition rule is the single promotion threshold for this skill. The Quick Reference row for self-healing Handoff blocks and the aggregator skills (`learning-aggregator`, `learning-aggregator-ci`) all use this same rule.
 
-Write promoted rules as short prevention rules (what to do before/while coding),
-not long incident write-ups.
+Write promoted rules as short prevention rules (what to do before/while coding), not long incident write-ups.
 
 ## Periodic Review
 
@@ -380,22 +331,6 @@ Use to filter learnings by codebase region:
 6. **Use consistent categories** - enables filtering
 7. **Promote aggressively** - if in doubt, add to CLAUDE.md or .github/copilot-instructions.md
 8. **Review regularly** - stale learnings lose value
-
-## Gitignore Options
-
-**Keep learnings local** (per-developer):
-```gitignore
-.learnings/
-```
-
-**Track learnings in repo** (team-wide):
-Don't add to .gitignore - learnings become shared knowledge.
-
-**Hybrid** (track templates, ignore entries):
-```gitignore
-.learnings/*.md
-!.learnings/.gitkeep
-```
 
 ## Hook Integration
 
@@ -555,9 +490,7 @@ Ask in chat: "Should I log this as a learning?"
 
 ### OpenClaw (Optional)
 
-OpenClaw-specific setup, promotion targets, and hybrid usage details are kept in
-`references/openclaw-integration.md` so this main skill stays focused on the core
-self-improvement workflow for coding agents.
+OpenClaw-specific setup, promotion targets, and hybrid usage details are kept in `references/openclaw-integration.md` so this main skill stays focused on the core self-improvement workflow for coding agents.
 
 ### Agent-Agnostic Guidance
 

@@ -1,6 +1,5 @@
 ---
-name: autoresearch
-description: Autonomous iterative experimentation loop for any programming task with a measurable outcome. Use when optimizing execution time, memory usage, test pass rate, code coverage, API latency, throughput, error rate, benchmark score, build time, bundle size, or any other metric-driven improvement task.
+description: "Autonomous iterative experimentation loop for any programming task with a measurable outcome. Use when optimizing execution time, memory usage, test pass rate, code coverage, API latency, throughput, error rate, benchmark score, build time, bundle size, or any other metric-driven improvement task."
 ---
 
 # Autoresearch: Autonomous Iterative Experimentation

@@ -1,7 +1,8 @@
 #!/bin/bash
 # integrate-self-improving.sh
-# Integrates the self-improving-agent skill into a target repository.
-# Installs into agent-specific hidden directories instead of repo-root skills/.
+# Integrates the self-improving-agent instructions into a target repository.
+# The skill has been moved to instructions/self-improving-agent.instructions.md.
+# This script creates .learnings/ infrastructure and appends guidance to AGENTS.md.
 
 set -euo pipefail
 
@@ -14,13 +15,6 @@ usage() {
 Usage: $(basename "$0") <repo-root>
 
 Integrates self-improving-agent into <repo-root>:
-  - Installs skill into agent-specific hidden dirs:
-      .claude/skills/self-improving-agent/
-      .kilo/skills/self-improving-agent/
-      .codex/skills/self-improving-agent/
-      .cursor/skills/self-improving-agent/
-      .github/copilot/skills/self-improving-agent/
-      .windsurf/skills/self-improving-agent/
   - Creates .learnings/ with LEARNINGS.md, ERRORS.md, FEATURE_REQUESTS.md
   - Updates .gitignore to ignore .learnings/
   - Appends self-improvement sections to existing AGENTS.md (preserves current content)
@@ -44,26 +38,10 @@ fi
 REPO_ROOT="$(cd "${REPO_ROOT}" && pwd)"
 echo "[*] Target repo: ${REPO_ROOT}"
 
-# 1. Install skill into agent-specific hidden directories
-AGENT_DIRS=(
-    ".claude/skills"
-    ".kilo/skills"
-    ".codex/skills"
-    ".cursor/skills"
-    ".github/copilot/skills"
-    ".windsurf/skills"
-)
-
-for agent_dir in "${AGENT_DIRS[@]}"; do
-    dst="${REPO_ROOT}/${agent_dir}/self-improving-agent"
-    if [ ! -d "${dst}" ]; then
-        mkdir -p "$(dirname "${dst}")"
-        cp -R "${AGENT_FORGE_ROOT}/skills/self-improving-agent" "${dst}"
-        echo "[+] Installed ${dst}"
-    else
-        echo "[*] ${dst} already exists — skipping"
-    fi
-done
+# 1. Skill installation skipped
+# The self-improving-agent skill has been moved to instructions/self-improving-agent.instructions.md.
+# Agent-specific skill installation is no longer applicable.
+echo "[*] Skill installation skipped — self-improving-agent is now an instruction file"
 
 # 2. Create .learnings/
 LEARNINGS_DIR="${REPO_ROOT}/.learnings"
@@ -117,7 +95,7 @@ This repo includes reusable skills in agent-specific hidden directories (`.claud
 
 | Skill                                                        | Purpose                                                     | Trigger                                                     |
 | ------------------------------------------------------------ | ----------------------------------------------------------- | ----------------------------------------------------------- |
-| [self-improving-agent](.claude/skills/self-improving-agent/SKILL.md) | Improve this AGENTS.md, create new skills, encode learnings | After completing a task, or when noticing repeated friction |
+| [self-improving-agent](../agent-forge/instructions/self-improving-agent.instructions.md) | Improve this AGENTS.md, create new skills, encode learnings | After completing a task, or when noticing repeated friction |
 
 ### Using Skills
 
@@ -139,7 +117,7 @@ When a workflow repeats — especially across projects — promote it to a skill
 
 2. **User correction?** If a human corrects your behavior (e.g., "don't use that API", "run tests this way"), add the correction to the appropriate section of this file (Local Norms, Guardrails, or Patterns & Gotchas) so future sessions inherit it.
 
-3. **Repeated friction?** If you notice yourself doing the same multi-step workflow more than once, consider creating a new skill in the appropriate agent skills directory. Use the [self-improving-agent skill](.claude/skills/self-improving-agent/SKILL.md) for the procedure.
+3. **Repeated friction?** If you notice yourself doing the same multi-step workflow more than once, consider creating a new skill in the appropriate agent skills directory. Use the [self-improving-agent instructions](../agent-forge/instructions/self-improving-agent.instructions.md) for the procedure.
 
 4. **Post-task reflection.** After completing a significant task, briefly review:
    - Did anything surprise you?
@@ -188,12 +166,6 @@ echo "[+] Backup removed: ${BACKUP}"
 
 echo ""
 echo "Done. Summary of changes in ${REPO_ROOT}:"
-echo "  - .claude/skills/self-improving-agent/ installed"
-echo "  - .kilo/skills/self-improving-agent/ installed"
-echo "  - .codex/skills/self-improving-agent/ installed"
-echo "  - .cursor/skills/self-improving-agent/ installed"
-echo "  - .github/copilot/skills/self-improving-agent/ installed"
-echo "  - .windsurf/skills/self-improving-agent/ installed"
 echo "  - .learnings/ created"
 echo "  - .gitignore updated"
 echo "  - AGENTS.md updated"

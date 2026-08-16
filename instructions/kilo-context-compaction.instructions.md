@@ -1,5 +1,4 @@
 ---
-name: kilo-context-compaction
 description: "Automatically compact the Kilo context window when it reaches 60% usage to maintain response quality, prevent context overflow, and ensure efficient token utilization."
 ---
 

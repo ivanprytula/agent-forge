@@ -82,3 +82,33 @@ async def test_create_record_missing_source(client: AsyncClient) -> None:
 - **`expire_on_commit=False`** is set on `_AsyncSessionLocal` in `conftest.py`. New session makers you add must include this — otherwise attribute access after `commit()` raises `MissingGreenlet`.
 - **SQLite dialect**: Avoid PostgreSQL-specific assertions (e.g. checking for `RETURNING` clause behaviour, `ON CONFLICT` semantics). The CRUD layer deliberately avoids these.
 - **Tag normalization**: Tags are lowercased by `RecordRequest.lowercase_tags` validator — assert `["stock", "nasdaq"]`, not `["Stock", "NASDAQ"]`.
+
+## Coverage Workflow
+
+Generate a coverage report with:
+
+```bash
+pytest --cov --cov-report=annotate:cov_annotate
+```
+
+If you are checking for coverage of a specific module, you can specify it like this:
+
+```bash
+pytest --cov=your_module_name --cov-report=annotate:cov_annotate
+```
+
+You can also specify specific tests to run, for example:
+
+```bash
+pytest tests/test_your_module.py --cov=your_module_name --cov-report=annotate:cov_annotate
+```
+
+Open the cov_annotate directory to view the annotated source code.
+There will be one file per source file. If a file has 100% source coverage, it means all lines are covered by tests, so you do not need to open the file.
+
+For each file that has less than 100% test coverage, find the matching file in cov_annotate and review the file.
+
+If a line starts with a ! (exclamation mark), it means that the line is not covered by tests.
+Add tests to cover the missing lines.
+
+Keep running the tests and improving coverage until all lines are covered.

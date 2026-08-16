@@ -9,8 +9,7 @@
     "**/.codex/**",
     "**/.cursor/**",
     "**/.windsurf/**",
-    "**/.github/copilot/**",
-    "skills/self-improving-agent/**"
+    "**/.github/copilot/**"
   ],
   "globs": [
     "**/*.md"
