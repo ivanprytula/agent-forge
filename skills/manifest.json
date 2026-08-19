@@ -1,5 +1,10 @@
 [
   {
+    "name": "across",
+    "description": "Apply ACROSS design principles (Abstractions & Decomposition, Composition by Default, Escape the Rabbit Hole, Optimize for Change, Simple As Possible, Screaming Contract) when writing, reviewing, or refactoring code. Use as the primary design lens for architecture and module-level decisions.",
+    "path": "skills/across/SKILL.md"
+  },
+  {
     "name": "alembic-migration-patterns",
     "description": "Manage schema migrations with isolated Alembic histories and additive changes.",
     "path": "skills/alembic-migration-patterns/SKILL.md"

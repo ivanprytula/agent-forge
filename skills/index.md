@@ -4,6 +4,7 @@ This directory contains agent skills. Load full `SKILL.md` only when the trigger
 
 | Name | Trigger |
 |------|---------|
+| [across](across/SKILL.md) | writing, reviewing, or refactoring code; architecture and module-level decisions |
 | [alembic-migration-patterns](alembic-migration-patterns/SKILL.md) | creating or reviewing migrations in alembic/ or services/*/alembic/ |
 | [ansible-playbook-patterns](ansible-playbook-patterns/SKILL.md) | writing or reviewing playbooks under ansible/playbooks/ or inventory |
 | [fastapi-testing](fastapi-testing/SKILL.md) | writing or reviewing API tests for FastAPI services |
