@@ -54,7 +54,7 @@
 ### Build & Run
 
 - Use `uv` for Python dependency management.
-- Use `python` from `.venv` when running repo tooling.
+- For running Python modules, scripts, and tests in the shell, use `uv run ...`, not `python -c ...` or `python3 -c ...`.
 
 ### Testing
 
