@@ -78,6 +78,11 @@
 - Commit messages should describe **what** changed and **why**.
 - **Never git push code unless explicitly given such a task.**
 
+## Skill development guardrails
+
+- **Run pre-commit before pushing skill changes.** All markdown, YAML, and Python checks are wired.
+- **Do not bypass `shellcheck` for adapter scripts.** It is the authoritative bash linter for this repo.
+
 ---
 
 ## Guardrails
