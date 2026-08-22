@@ -77,6 +77,7 @@
 - Write clear, atomic commits. One logical change per commit.
 - Commit messages should describe **what** changed and **why**.
 - **Never git push code unless explicitly given such a task.**
+- **Never drop git stashes.** Only use `git stash pop` or `git stash apply`. Preserve stashes across sessions in all repositories.
 
 ## Skill development guardrails
 
